@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #323338;
+}
+
+*::selection {
+    background-color: #0085ff;
+    color: white;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+    font-size: 14px;
+    overflow-y: hidden;
+}
+
+div {
+    position: relative;
+    box-sizing: border-box;
+}
+
+* {
+    transition: 0.3s background;
+}
