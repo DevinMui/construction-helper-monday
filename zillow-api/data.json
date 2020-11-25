@@ -1,0 +1,1072 @@
+{
+    "data": {
+        "property": {
+            "country": "USA",
+            "state": "CA",
+            "county": "Sacramento County",
+            "city": "Sacramento",
+            "homeStatus": "FOR_SALE",
+            "localProtections": {
+                "protectionLevels": null,
+                "level": "state",
+                "protections": [
+                    {
+                        "covers": {
+                            "genderIdentity": true,
+                            "sexualOrientation": true,
+                            "housingChoiceVoucher": null,
+                            "sourceOfIncome": null
+                        },
+                        "description": "On June 15, 2020, the US Supreme Court ruled that employers subject to Title VII cannot hire, fire, or otherwise discriminate against employees based on their sexual orientation or gender identity.",
+                        "type": "Employment"
+                    },
+                    {
+                        "covers": {
+                            "genderIdentity": true,
+                            "sexualOrientation": true,
+                            "housingChoiceVoucher": null,
+                            "sourceOfIncome": null
+                        },
+                        "description": "Protection from being unfairly evicted, denied housing, or refused the ability to rent or buy housing.",
+                        "type": "Housing"
+                    },
+                    {
+                        "covers": {
+                            "genderIdentity": true,
+                            "sexualOrientation": true,
+                            "housingChoiceVoucher": null,
+                            "sourceOfIncome": null
+                        },
+                        "description": "Protection from being unfairly refused services or entry to or from places accessible to the public (retail stores, restaurants, parks, hotels, etc).",
+                        "type": "Public Accommodations"
+                    }
+                ]
+            }
+        }
+    }
+},
+{
+    "data": {
+        "property": {
+            "id": "UHJvcGVydHk6NjMwNDUzNzA=",
+            "walkScore": null,
+            "transitScore": {
+                "transit_score": 15,
+                "description": "Minimal Transit",
+                "ws_link": "https://www.walkscore.com/score/loc/lat=38.6843/lng=-121.5043/?utm_source=zillow2.com&utm_medium=ts_api&utm_campaign=ts_api"
+            }
+        }
+    }
+}),
+{
+    "data": {
+        "property": {
+            "zestimateDeepDiveData": {
+                "hedonicCompsModel": {
+                    "estimate": 446925,
+                    "comps": [
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://maps.googleapis.com/maps/api/streetview?location=141+Bombay+Cir%2C+Sacramento%2C+CA+95835&size=316x234&key=AIzaSyARFMLB1na-BBWf7_R3-5YOQQaHqEJf6RQ&source=outdoor&&signature=RWRPf8Es8ouav-rZoAFngObCGr0="
+                                }
+                            ],
+                            "price": 441000,
+                            "currency": "USD",
+                            "bedrooms": 4,
+                            "bathrooms": 2,
+                            "livingArea": 1934,
+                            "livingAreaValue": 1934,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 7114,
+                            "lotAreaValue": 7114,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "141 Bombay Cir",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95835"
+                            },
+                            "latitude": 38.677664,
+                            "longitude": -121.497144,
+                            "zpid": 61336521,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/141-Bombay-Cir-Sacramento-CA-95835/61336521_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/272bdddfa86b6cce12b89eedb64b1136-p_c.jpg"
+                                }
+                            ],
+                            "price": 450000,
+                            "currency": "USD",
+                            "bedrooms": 2,
+                            "bathrooms": 2,
+                            "livingArea": 1738,
+                            "livingAreaValue": 1738,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 4725,
+                            "lotAreaValue": 4725,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "2242 Ryedale Ln",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95835"
+                            },
+                            "latitude": 38.683824,
+                            "longitude": -121.511765,
+                            "zpid": 63137362,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/2242-Ryedale-Ln-Sacramento-CA-95835/63137362_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/9bc0f98206f7e4eb649ed51805550ee5-p_c.jpg"
+                                }
+                            ],
+                            "price": 425000,
+                            "currency": "USD",
+                            "bedrooms": 4,
+                            "bathrooms": 2,
+                            "livingArea": 1709,
+                            "livingAreaValue": 1709,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 6098,
+                            "lotAreaValue": 6098,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "1650 Salizar Way",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95835"
+                            },
+                            "latitude": 38.676628,
+                            "longitude": -121.49753,
+                            "zpid": 61336429,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/1650-Salizar-Way-Sacramento-CA-95835/61336429_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/d695061f676096adf708bef910f529ef-p_c.jpg"
+                                }
+                            ],
+                            "price": 441000,
+                            "currency": "USD",
+                            "bedrooms": 4,
+                            "bathrooms": 2,
+                            "livingArea": 1735,
+                            "livingAreaValue": 1735,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 6708,
+                            "lotAreaValue": 6708,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "5628 Bridgecross Dr",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95835"
+                            },
+                            "latitude": 38.676902,
+                            "longitude": -121.495427,
+                            "zpid": 61336388,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/5628-Bridgecross-Dr-Sacramento-CA-95835/61336388_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/63ac75338cd2fdb2c4b27606b448e62d-p_c.jpg"
+                                }
+                            ],
+                            "price": 449000,
+                            "currency": "USD",
+                            "bedrooms": 2,
+                            "bathrooms": 2,
+                            "livingArea": 1722,
+                            "livingAreaValue": 1722,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 5775,
+                            "lotAreaValue": 5775,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "311 Mill Valley Cir #S",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95835"
+                            },
+                            "latitude": 38.679051,
+                            "longitude": -121.514033,
+                            "zpid": 61337165,
+                            "homeStatus": "FOR_SALE",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/311-Mill-Valley-Cir-S-Sacramento-CA-95835/61337165_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": true
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/957abdb0c630ad7d0602e7f46ec6517f-p_c.jpg"
+                                }
+                            ],
+                            "price": 390000,
+                            "currency": "USD",
+                            "bedrooms": 2,
+                            "bathrooms": 2,
+                            "livingArea": 1738,
+                            "livingAreaValue": 1738,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 4726,
+                            "lotAreaValue": 4726,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "2247 Ryedale Ln",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95835"
+                            },
+                            "latitude": 38.684223,
+                            "longitude": -121.5119,
+                            "zpid": 63137320,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/2247-Ryedale-Ln-Sacramento-CA-95835/63137320_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/901ea40e52c42cf47561fd329aad8f7b-p_c.jpg"
+                                }
+                            ],
+                            "price": 2199,
+                            "currency": "USD",
+                            "bedrooms": 4,
+                            "bathrooms": 2,
+                            "livingArea": 1777,
+                            "livingAreaValue": 1777,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 6098,
+                            "lotAreaValue": 6098,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "110 Connor Cir",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95835"
+                            },
+                            "latitude": 38.661839,
+                            "longitude": -121.503703,
+                            "zpid": 51598408,
+                            "homeStatus": "FOR_RENT",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/110-Connor-Cir-Sacramento-CA-95835/51598408_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/a4feadd95be13c442b5f7fab146236ce-p_c.jpg"
+                                }
+                            ],
+                            "price": 415000,
+                            "currency": "USD",
+                            "bedrooms": 3,
+                            "bathrooms": 3,
+                            "livingArea": 1796,
+                            "livingAreaValue": 1796,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 7797,
+                            "lotAreaValue": 7797,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "450 Rick Heinrich Cir",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95835"
+                            },
+                            "latitude": 38.680517,
+                            "longitude": -121.504412,
+                            "zpid": 59376261,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/450-Rick-Heinrich-Cir-Sacramento-CA-95835/59376261_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/232e1f3a0d88c5aad6ca8fc267f6f46f-p_c.jpg"
+                                }
+                            ],
+                            "price": 450000,
+                            "currency": "USD",
+                            "bedrooms": 3,
+                            "bathrooms": 2,
+                            "livingArea": 1911,
+                            "livingAreaValue": 1911,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 6098,
+                            "lotAreaValue": 6098,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "5824 Fancy Way",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95835"
+                            },
+                            "latitude": 38.68133,
+                            "longitude": -121.499076,
+                            "zpid": 61336746,
+                            "homeStatus": "PENDING",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/5824-Fancy-Way-Sacramento-CA-95835/61336746_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": true
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/803534466e656badb1a727d177723e0c-p_c.jpg"
+                                }
+                            ],
+                            "price": 435000,
+                            "currency": "USD",
+                            "bedrooms": 2,
+                            "bathrooms": 2,
+                            "livingArea": 1722,
+                            "livingAreaValue": 1722,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 6019,
+                            "lotAreaValue": 6019,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "75 Montilla Cir",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95835"
+                            },
+                            "latitude": 38.677978,
+                            "longitude": -121.512335,
+                            "zpid": 61336183,
+                            "homeStatus": "PENDING",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/75-Montilla-Cir-Sacramento-CA-95835/61336183_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": true
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null
+                        }
+                    ]
+                },
+                "listRatioModel": {
+                    "estimate": 477957,
+                    "listRatio": 1,
+                    "comps": [
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/40360c5d52433fcfe2deacfdf3ff909e-p_c.jpg"
+                                }
+                            ],
+                            "price": 525000,
+                            "currency": "USD",
+                            "bedrooms": 2,
+                            "bathrooms": 1,
+                            "livingArea": 1179,
+                            "livingAreaValue": 1179,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 5662,
+                            "lotAreaValue": 5662,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "2825 38th St",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95817"
+                            },
+                            "latitude": 38.550184,
+                            "longitude": -121.464794,
+                            "zpid": 25799482,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/2825-38th-St-Sacramento-CA-95817/25799482_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null,
+                            "lastSoldPrice": 525000
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/b728a6d5bf167216cd0213db96cb4f71-p_c.jpg"
+                                }
+                            ],
+                            "price": 515000,
+                            "currency": "USD",
+                            "bedrooms": 4,
+                            "bathrooms": 2,
+                            "livingArea": 2425,
+                            "livingAreaValue": 2425,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 8276,
+                            "lotAreaValue": 8276,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "9466 Palmerson Dr",
+                                "city": "Antelope",
+                                "state": "CA",
+                                "zipcode": "95843"
+                            },
+                            "latitude": 38.710902,
+                            "longitude": -121.338853,
+                            "zpid": 59277871,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/9466-Palmerson-Dr-Antelope-CA-95843/59277871_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null,
+                            "lastSoldPrice": 515000
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/6e83d838283f8ab94666c360f12f227a-p_c.jpg"
+                                }
+                            ],
+                            "price": 502000,
+                            "currency": "USD",
+                            "bedrooms": 5,
+                            "bathrooms": 3,
+                            "livingArea": 2347,
+                            "livingAreaValue": 2347,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 5619,
+                            "lotAreaValue": 5619,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "9665 Ashstone Way",
+                                "city": "Elk Grove",
+                                "state": "CA",
+                                "zipcode": "95624"
+                            },
+                            "latitude": 38.4061,
+                            "longitude": -121.345594,
+                            "zpid": 61334948,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/9665-Ashstone-Way-Elk-Grove-CA-95624/61334948_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null,
+                            "lastSoldPrice": 502000
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/aea594e9b61cb5b471584030a29c8103-p_c.jpg"
+                                }
+                            ],
+                            "price": 360000,
+                            "currency": "USD",
+                            "bedrooms": 3,
+                            "bathrooms": 2,
+                            "livingArea": 1138,
+                            "livingAreaValue": 1138,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 6098,
+                            "lotAreaValue": 6098,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "7724 Spring Valley Ave",
+                                "city": "Citrus Heights",
+                                "state": "CA",
+                                "zipcode": "95610"
+                            },
+                            "latitude": 38.688391,
+                            "longitude": -121.279412,
+                            "zpid": 25983830,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/7724-Spring-Valley-Ave-Citrus-Heights-CA-95610/25983830_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null,
+                            "lastSoldPrice": 360000
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/75e55a8da5798fa2a6681ea8a8d78235-p_c.jpg"
+                                }
+                            ],
+                            "price": 420000,
+                            "currency": "USD",
+                            "bedrooms": 3,
+                            "bathrooms": 2,
+                            "livingArea": 1582,
+                            "livingAreaValue": 1582,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 5066,
+                            "lotAreaValue": 5066,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "2175 Paul Courter Way",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95835"
+                            },
+                            "latitude": 38.679652,
+                            "longitude": -121.50502,
+                            "zpid": 61291494,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/2175-Paul-Courter-Way-Sacramento-CA-95835/61291494_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null,
+                            "lastSoldPrice": 420000
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/644f8f35661340b9596063e6de0df818-p_c.jpg"
+                                }
+                            ],
+                            "price": 389000,
+                            "currency": "USD",
+                            "bedrooms": 4,
+                            "bathrooms": null,
+                            "livingArea": 1944,
+                            "livingAreaValue": 1944,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 6969,
+                            "lotAreaValue": 6969,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "748 Lampasas Ave",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95815"
+                            },
+                            "latitude": 38.614485,
+                            "longitude": -121.449612,
+                            "zpid": 26077954,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "MULTI_FAMILY",
+                            "hdpUrl": "/homedetails/748-Lampasas-Ave-Sacramento-CA-95815/26077954_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null,
+                            "lastSoldPrice": 389000
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/7b48a6636df949e35cdf25499b306f25-p_c.jpg"
+                                }
+                            ],
+                            "price": 407000,
+                            "currency": "USD",
+                            "bedrooms": 3,
+                            "bathrooms": 3,
+                            "livingArea": 1591,
+                            "livingAreaValue": 1591,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 2482,
+                            "lotAreaValue": 2482,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "150 Soaring Hawk Ln",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95833"
+                            },
+                            "latitude": 38.609611,
+                            "longitude": -121.529119,
+                            "zpid": 67824998,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/150-Soaring-Hawk-Ln-Sacramento-CA-95833/67824998_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null,
+                            "lastSoldPrice": 407000
+                        },
+                        {
+                            "miniCardPhotos": [
+                                {
+                                    "url": "https://photos.zillowstatic.com/fp/28945508b988ceccfd0745cbc04b6bcd-p_c.jpg"
+                                }
+                            ],
+                            "price": 591000,
+                            "currency": "USD",
+                            "bedrooms": 3,
+                            "bathrooms": 2,
+                            "livingArea": 1802,
+                            "livingAreaValue": 1802,
+                            "livingAreaUnits": "Square Feet",
+                            "livingAreaUnitsShort": "sqft",
+                            "lotSize": 9147,
+                            "lotAreaValue": 9147,
+                            "lotAreaUnits": "Square Feet",
+                            "address": {
+                                "streetAddress": "6440 Holstein Way",
+                                "city": "Sacramento",
+                                "state": "CA",
+                                "zipcode": "95831"
+                            },
+                            "latitude": 38.509402,
+                            "longitude": -121.511945,
+                            "zpid": 25816625,
+                            "homeStatus": "RECENTLY_SOLD",
+                            "homeType": "SINGLE_FAMILY",
+                            "hdpUrl": "/homedetails/6440-Holstein-Way-Sacramento-CA-95831/25816625_zpid/",
+                            "listing_sub_type": {
+                                "is_newHome": false,
+                                "is_forAuction": false,
+                                "is_bankOwned": false,
+                                "is_foreclosure": false,
+                                "is_FSBO": false,
+                                "is_comingSoon": false,
+                                "is_FSBA": false
+                            },
+                            "isUndisclosedAddress": false,
+                            "attributionInfo": {
+                                "infoString1": null,
+                                "infoString2": null,
+                                "infoString3": null,
+                                "infoString4": null,
+                                "infoString5": null,
+                                "infoString6": null,
+                                "infoString7": null,
+                                "infoString9": null
+                            },
+                            "isPremierBuilder": false,
+                            "state": "CA",
+                            "isZillowOwned": false,
+                            "newConstructionType": null,
+                            "lastSoldPrice": 591000
+                        }
+                    ]
+                },
+                "taxRatioModel": {
+                    "estimate": null,
+                    "taxRatio": null,
+                    "taxYear": 2020,
+                    "comps": null
+                },
+                "priorSaleModel": {
+                    "estimate": 505893,
+                    "wrsRatio": 1.11,
+                    "soldPrice": 455000,
+                    "soldDate": 1135036800000
+                },
+                "offMarketModel": { "estimate": 446174 }
+            }
+        }
+    }
+}
