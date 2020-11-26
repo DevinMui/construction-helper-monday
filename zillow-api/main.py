@@ -1,5 +1,7 @@
 from requests import get, post
 
+import json
+
 BASE_URL = "https://www.zillow.com"
 
 # Adding headers makes Zillow think you're not a robot for a short while
@@ -24,8 +26,7 @@ def get_latlng_bounds(addr, city):
 # Search can also get information about the property without extra requests
 # Walkscore and price history data needs to be found via another request
 def search(addr, city):
-    # uri = "/search/GetSearchPageState.htm"
-    uri = '/search/GetSearchPageState.htm?searchQueryState={"pagination":{},"mapBounds":{"west":-121.58174514770508,"east":-121.42707824707031,"south":38.629879442063555,"north":38.73855285385149},"mapZoom":13,"isMapVisible":false,"filterState":{"isAllHomes":{"value":true},"sortSelection":{"value":"globalrelevanceex"}},"isListVisible":true}&wants={%22cat1%22:[%22mapResults%22]}&requestId=2'
+    uri = "/search/GetSearchPageState.htm"
     # TODO: figure out how to get bounds
     # More info: map bounds is required to get properties
     # Map bounds appear to be a box with lat/lng
@@ -33,30 +34,32 @@ def search(addr, city):
     # but omitting it yields more results)
     # Google Maps -> box?
 
-    # query doesn't convert to string properly yet...
+    # json->str is necessary to get correct param format
     query = {
-        "searchQueryState": {
-            "pagination": {},
-            "mapBounds": {
-                "west": -121.58174514770508,
-                "east": -121.42707824707031,
-                "south": 38.629879442063555,
-                "north": 38.73855285385149,
-            },
-            "mapZoom": 13,
-            # "regionSelection": [{"regionId": 20288, "regionType": 6}],
-            "isMapVisible": True,
-            "filterState": {
-                "isAllHomes": {"value": True},
-                "sortSelection": {"value": "globalrelevanceex"},
-            },
-            "isListVisible": True,
-        },
-        "wants": {"cat1": ["mapResults"]},
+        "searchQueryState": json.dumps(
+            {
+                "pagination": {},
+                "mapBounds": {
+                    "west": -121.58174514770508,
+                    "east": -121.42707824707031,
+                    "south": 38.629879442063555,
+                    "north": 38.73855285385149,
+                },
+                "mapZoom": 13,
+                # "regionSelection": [{"regionId": 20288, "regionType": 6}],
+                "isMapVisible": True,
+                "filterState": {
+                    "isAllHomes": {"value": True},
+                    "sortSelection": {"value": "globalrelevanceex"},
+                },
+                "isListVisible": True,
+            }
+        ),
+        "wants": json.dumps({"cat1": ["mapResults"]}),
         "requestId": 2,
     }
 
-    r = get(BASE_URL + uri, headers=headers)
+    r = get(BASE_URL + uri, params=query, headers=headers)
     print("[SEARCH]", r.text)
     return r
 
