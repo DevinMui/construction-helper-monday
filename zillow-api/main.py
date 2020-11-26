@@ -15,6 +15,11 @@ headers = {
     "cookie": 'zguid=23|%24ac3ea3a6-d9ed-4795-a346-974a4d094d17; zgsession=1|3e1c22eb-e574-4358-9531-e0a1f11b6312; g_state={"i_p":1606281194042,"i_l":1}; G_ENABLED_IDPS=google; userid=X|3|6c1d3a015025d7e5%7C6%7Cmg9AzRCHaX8ImBqWyVcJGYWSCDQox2k8; loginmemento=1|1a73d28a10571a472eb14d2a85ec8514fe1300117042bab38b9c52fca08ac87d; JSESSIONID=A632A1B6D20B675039FD608D936DD956; ZILLOW_SID=1|AAAAAVVbFRIBVVsVEjKZA%2BrArqpI86irXgTqGyyOOSzzQkqoCS84dd7IYXDKDA7aopIZAtl3srIjjIiIhf1BorgIYWMP; ZILLOW_SSID=1|; search=6|1608875617733%7Cregion%3Dsacramento-ca%26rect%3D38.71%252C-120.93%252C36.71%252C-122.93%26disp%3Dmap%26mdm%3Dauto%26pt%3Dpmf%252Cpf%26fs%3D1%26fr%3D0%26rs%3D0%26ah%3D0%09%09%09%09%09%09%09%09; AWSALB=GlBlZs7AVufRb5Zw+O+zBB8OeSNWOh7QI+rcREPJKFztrw0ABd3TfVWAbLje4xfzzocViRe0hHCUQuNOC3xNGAXQfyBEOfB4OLvMGzJxM9mbpY51MeT4w+xnf1m4; AWSALBCORS=GlBlZs7AVufRb5Zw+O+zBB8OeSNWOh7QI+rcREPJKFztrw0ABd3TfVWAbLje4xfzzocViRe0hHCUQuNOC3xNGAXQfyBEOfB4OLvMGzJxM9mbpY51MeT4w+xnf1m4',
 }
 
+# TODO: Get information from Google Maps API
+def get_latlng_bounds(addr, city):
+    pass
+
+
 # Search finds properties in an area
 # Search can also get information about the property without extra requests
 # Walkscore and price history data needs to be found via another request
@@ -52,16 +57,25 @@ def search(addr, city):
     }
 
     r = get(BASE_URL + uri, headers=headers)
-    print(r.text)
+    print("[SEARCH]", r.text)
     return r
 
 
 def get_price_history(zid):
-    pass
+    uri = f"/graphql/?zpid={zid}&timePeriod=TEN_YEARS&metricType=LOCAL_HOME_VALUES&forecast=true&operationName=HomeValueChartDataQuery"
+    # modify zid
+    query = '{"query":"query HomeValueChartDataQuery($zpid: ID!, $metricType: HomeValueChartMetricType, $timePeriod: HomeValueChartTimePeriod) {\n  property(zpid: $zpid) {\n    homeValueChartData(metricType: $metricType, timePeriod: $timePeriod) {\n      points {\n        x\n        y\n      }\n      name\n    }\n  }\n}\n","operationName":"HomeValueChartDataQuery","variables":{"zpid":63045370,"timePeriod":"TEN_YEARS","metricType":"LOCAL_HOME_VALUES","forecast":true},"clientVersion":"home-details/6.0.11.0.0.hotfix-11-23-2020.d69fab8"}'
+    r = post(BASE_URL + uri, headers=headers, body=query)
+    print("[PRICES]", r.text)
+    return r
 
 
 def get_walkscore(zid):
-    pass
+    uri = f"/graphql/?zpid={zid}&operationName=WalkAndTransitScoreQuery"
+    query = '{"query":"query WalkAndTransitScoreQuery($zpid: ID!) {\n  property(zpid: $zpid) {\n    id\n    walkScore {\n      walkscore\n      description\n      ws_link\n    }\n    transitScore {\n      transit_score\n      description\n      ws_link\n    }\n  }\n}\n","operationName":"WalkAndTransitScoreQuery","variables":{"zpid":2077477020},"clientVersion":"home-details/6.0.11.0.0.hotfix-11-23-2020.d69fab8"}'
+    r = post(BASE_URL + uri, headers=headers, body=query)
+    print("[WALKSCORE]", r.text)
+    return r
 
 
 # do we even need this?
@@ -70,5 +84,4 @@ def deepdive(zid):
 
 
 search("", "")
-# print(search("", "").text)
 
