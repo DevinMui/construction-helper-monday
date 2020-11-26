@@ -5,7 +5,7 @@ import json
 BASE_URL = "https://www.zillow.com"
 
 # Adding headers makes Zillow think you're not a robot for a short while
-headers = {
+HEADERS = {
     "authority": "www.zillow.com",
     "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_0_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36",
     "accept": "*/*",
@@ -59,24 +59,40 @@ def search(addr, city):
         "requestId": 2,
     }
 
-    r = get(BASE_URL + uri, params=query, headers=headers)
+    r = get(BASE_URL + uri, params=query, headers=HEADERS)
     print("[SEARCH]", r.text)
     return r
 
 
 def get_price_history(zid):
     uri = f"/graphql/?zpid={zid}&timePeriod=TEN_YEARS&metricType=LOCAL_HOME_VALUES&forecast=true&operationName=HomeValueChartDataQuery"
+
+    headers = HEADERS
+    headers["Content-Type"] = "text/plain"
+
+    variables = {
+        "zpid": zid,
+        "timePeriod": "TEN_YEARS",
+        "metricType": "LOCAL_HOME_VALUES",
+        "forecast": True,
+    }
     # modify zid
+    query = (
+        '{"query":"query HomeValueChartDataQuery($zpid: ID!, $metricType: HomeValueChartMetricType, $timePeriod: HomeValueChartTimePeriod) {\nproperty(zpid: $zpid) {\nhomeValueChartData(metricType: $metricType, timePeriod: $timePeriod) {\npoints {\nx \ny \n}\nname \n}\n}\n}\n","operationName":"HomeValueChartDataQuery","variables":'
+        + json.dumps(variables)
+        + ',"clientVersion":"home-details/6.0.11.0.0.hotfix-11-23-2020.d69fab8"}'
+    )
     query = '{"query":"query HomeValueChartDataQuery($zpid: ID!, $metricType: HomeValueChartMetricType, $timePeriod: HomeValueChartTimePeriod) {\n  property(zpid: $zpid) {\n    homeValueChartData(metricType: $metricType, timePeriod: $timePeriod) {\n      points {\n        x\n        y\n      }\n      name\n    }\n  }\n}\n","operationName":"HomeValueChartDataQuery","variables":{"zpid":63045370,"timePeriod":"TEN_YEARS","metricType":"LOCAL_HOME_VALUES","forecast":true},"clientVersion":"home-details/6.0.11.0.0.hotfix-11-23-2020.d69fab8"}'
-    r = post(BASE_URL + uri, headers=headers, body=query)
+    print("[PRICES] headers: ", headers, "\n")
+    r = post(BASE_URL + uri, headers=headers, data=query)
     print("[PRICES]", r.text)
     return r
 
 
 def get_walkscore(zid):
     uri = f"/graphql/?zpid={zid}&operationName=WalkAndTransitScoreQuery"
-    query = '{"query":"query WalkAndTransitScoreQuery($zpid: ID!) {\n  property(zpid: $zpid) {\n    id\n    walkScore {\n      walkscore\n      description\n      ws_link\n    }\n    transitScore {\n      transit_score\n      description\n      ws_link\n    }\n  }\n}\n","operationName":"WalkAndTransitScoreQuery","variables":{"zpid":2077477020},"clientVersion":"home-details/6.0.11.0.0.hotfix-11-23-2020.d69fab8"}'
-    r = post(BASE_URL + uri, headers=headers, body=query)
+    query = '{"query":"query WalkAndTransitScoreQuery($zpid: ID!) {\nproperty(zpid: $zpid) {\nid\nwalkScore {\nwalkscore\ndescription\nws_link\n}\ntransitScore {\ntransit_score\ndescription\nws_link\n}\n}\n}\n","operationName":"WalkAndTransitScoreQuery","variables":{"zpid":2077477020},"clientVersion":"home-details/6.0.11.0.0.hotfix-11-23-2020.d69fab8"}'
+    r = post(BASE_URL + uri, headers=HEADERS, data=query)
     print("[WALKSCORE]", r.text)
     return r
 
@@ -86,5 +102,5 @@ def deepdive(zid):
     pass
 
 
-search("", "")
-
+# search("", "")
+get_price_history(63045370)
