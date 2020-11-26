@@ -33,3 +33,7 @@ get_walkscore(zid)
 Use search to find a property. The property will have a `zid` property. Use the `zid` to find the price history and walkscore.
 
 For example responses, look at `prices.json` and `search.json`.
+
+### Common Issues
+
+Zillow might think you're a bot. Try opening zillow on the browser and doing the request again.
