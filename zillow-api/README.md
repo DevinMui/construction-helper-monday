@@ -2,6 +2,21 @@
 
 Zillow has an API but they started locking it down recently (I wonder why...). This repo exploits Zillow's _private_ API to collect data.
 
+### Prereqs
+
+-   Python 3 (not a racist)
+-   pip
+
+### Setup
+
+Add an environmental variable for the Google API key for Google Maps geocoding.
+
+```sh
+export GOOGLE_API_KEY=<your api key here>
+```
+
+For easier development, put this line at the end of your virtualenv `/env/bin/activate` script (you are using virtualenv, right?).
+
 ### Methods
 
 ```py

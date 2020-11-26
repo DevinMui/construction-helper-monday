@@ -1,6 +1,8 @@
 from requests import get, post
 
+import googlemaps
 import json
+import os
 
 BASE_URL = "https://www.zillow.com"
 
@@ -18,36 +20,43 @@ HEADERS = {
     "cookie": 'zguid=23|%24ac3ea3a6-d9ed-4795-a346-974a4d094d17; zgsession=1|3e1c22eb-e574-4358-9531-e0a1f11b6312; g_state={"i_p":1606281194042,"i_l":1}; G_ENABLED_IDPS=google; userid=X|3|6c1d3a015025d7e5%7C6%7Cmg9AzRCHaX8ImBqWyVcJGYWSCDQox2k8; loginmemento=1|1a73d28a10571a472eb14d2a85ec8514fe1300117042bab38b9c52fca08ac87d; JSESSIONID=A632A1B6D20B675039FD608D936DD956; ZILLOW_SID=1|AAAAAVVbFRIBVVsVEjKZA%2BrArqpI86irXgTqGyyOOSzzQkqoCS84dd7IYXDKDA7aopIZAtl3srIjjIiIhf1BorgIYWMP; ZILLOW_SSID=1|; search=6|1608875617733%7Cregion%3Dsacramento-ca%26rect%3D38.71%252C-120.93%252C36.71%252C-122.93%26disp%3Dmap%26mdm%3Dauto%26pt%3Dpmf%252Cpf%26fs%3D1%26fr%3D0%26rs%3D0%26ah%3D0%09%09%09%09%09%09%09%09; AWSALB=GlBlZs7AVufRb5Zw+O+zBB8OeSNWOh7QI+rcREPJKFztrw0ABd3TfVWAbLje4xfzzocViRe0hHCUQuNOC3xNGAXQfyBEOfB4OLvMGzJxM9mbpY51MeT4w+xnf1m4; AWSALBCORS=GlBlZs7AVufRb5Zw+O+zBB8OeSNWOh7QI+rcREPJKFztrw0ABd3TfVWAbLje4xfzzocViRe0hHCUQuNOC3xNGAXQfyBEOfB4OLvMGzJxM9mbpY51MeT4w+xnf1m4',
 }
 
-# TODO: Get information from Google Maps API
-def get_latlng_bounds(addr, city):
-    pass
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+GMAPS_CLIENT = googlemaps.Client(key=GOOGLE_API_KEY)
+
+# Get latlng boundaries for a specific location
+# Used in search(addr)
+def get_latlng_bounds(addr: str):
+    geocode_result = GMAPS_CLIENT.geocode(addr)
+    if not len(geocode_result):
+        return None
+
+    viewport = geocode_result[0]["geometry"]["viewport"]
+    northeast = viewport["northeast"]
+    southwest = viewport["southwest"]
+    bounds = {
+        "west": southwest["lng"],
+        "east": northeast["lng"],
+        "south": southwest["lat"],
+        "north": northeast["lat"],
+    }
+    return bounds
 
 
 # Search finds properties in an area
 # Search can also get information about the property without extra requests
-# Walkscore and price history data needs to be found via another request
-def search(addr, city):
-    uri = "/search/GetSearchPageState.htm"
-    # TODO: figure out how to get bounds
-    # More info: map bounds is required to get properties
-    # Map bounds appear to be a box with lat/lng
-    # regionSelection is not necessary (not sure what it's for
-    # but omitting it yields more results)
-    # Google Maps -> box?
+def search(addr: str):
+    latlng_bounds = get_latlng_bounds(addr)
+    if not latlng_bounds:
+        return None
 
-    # json->str is necessary to get correct param format
+    uri = "/search/GetSearchPageState.htm"
+
     query = {
         "searchQueryState": json.dumps(
             {
                 "pagination": {},
-                "mapBounds": {
-                    "west": -121.58174514770508,
-                    "east": -121.42707824707031,
-                    "south": 38.629879442063555,
-                    "north": 38.73855285385149,
-                },
+                "mapBounds": latlng_bounds,
                 "mapZoom": 13,
-                # "regionSelection": [{"regionId": 20288, "regionType": 6}],
                 "isMapVisible": True,
                 "filterState": {
                     "isAllHomes": {"value": True},
@@ -64,7 +73,11 @@ def search(addr, city):
     return r
 
 
-def get_price_history(zid):
+# Get pricing history
+# Returns an array of x and y values
+# where x represents time since Unix epoch
+# and y represents money in USD (different for countries?)
+def get_price_history(zid: int):
     uri = f"/graphql/?zpid={zid}&timePeriod=TEN_YEARS&metricType=LOCAL_HOME_VALUES&forecast=true&operationName=HomeValueChartDataQuery"
 
     headers = HEADERS
@@ -76,17 +89,20 @@ def get_price_history(zid):
         "metricType": "LOCAL_HOME_VALUES",
         "forecast": True,
     }
-    # modify zid
+
     query = (
         '{"query":"query HomeValueChartDataQuery($zpid: ID!, $metricType: HomeValueChartMetricType, $timePeriod: HomeValueChartTimePeriod) {\\nproperty(zpid: $zpid) {\\nhomeValueChartData(metricType: $metricType, timePeriod: $timePeriod) {\\npoints {\\nx\\ny\\n}\\nname\\n}\\n}\\n}\\n","operationName":"HomeValueChartDataQuery","variables":'
         + json.dumps(variables)
         + ',"clientVersion":"home-details/6.0.11.0.0.hotfix-11-23-2020.d69fab8"}'
     )
+
     r = post(BASE_URL + uri, headers=headers, data=query)
     return r
 
 
-def get_walkscore(zid):
+# Get some interesting metadata
+# like transit information + walking info
+def get_walkscore(zid: int):
     uri = f"/graphql/?zpid={zid}&operationName=WalkAndTransitScoreQuery"
 
     headers = HEADERS
@@ -101,15 +117,42 @@ def get_walkscore(zid):
         + json.dumps(variables)
         + ',"clientVersion":"home-details/6.0.11.0.0.hotfix-11-23-2020.d69fab8"}'
     )
+
     r = post(BASE_URL + uri, headers=headers, data=query)
     return r
 
 
 # do we even need this?
-def deepdive(zid):
+def deepdive(zid: int):
     pass
 
 
-# search("", "")
-# get_price_history(63045370)
-# get_walkscore(63045370)
+if __name__ == "__main__":
+    print("~~~Testing~~~")
+
+    place = "San Francisco, California"
+    print("[get_latlng_bounds]", "Geocoding", place)
+    bounds = get_latlng_bounds(place)
+    print(json.dumps(bounds))
+    print("\n")
+
+    place = "100 Silver Ave, San Francisco, California"
+    print("[search]", "Finding places in", place)
+    search_results = search(place)
+    print(search_results.text)
+    print("\n")
+
+    # some arbitrary place in Sacramento
+    zid = 63045370
+
+    print("[get_price_history]", "Getting the pricing history of", zid)
+    price_history_request = get_price_history(zid)
+    print(price_history_request.text)
+    print("\n")
+
+    print("[get_walkscore]", "Getting the walkscore of", zid)
+    walkscore_request = get_walkscore(zid)
+    print(walkscore_request.text)
+    print("\n")
+
+    print("~~~Testing Concluded~~~")
