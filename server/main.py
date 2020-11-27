@@ -35,7 +35,7 @@ def search():
         "livingArea",
         "homeType",
         "homeStatus",
-        "image",
+        "imageLink",
         "zestimate",
         "rentZestimate",
         "taxAssessedValue",
@@ -51,8 +51,8 @@ def search():
         if param + "Id" in values:
             columns[param] = values.get(param + "Id", None)
 
-    # values = zillow_api.search(address)
-    values = json.loads(open("./zillow/search.json", "r").read())
+    values = zillow_api.search(address).json()
+    # values = json.loads(open("./zillow/search.json", "r").read())
 
     # parse zillow response
     values = values["cat1"]["searchResults"]["mapResults"]

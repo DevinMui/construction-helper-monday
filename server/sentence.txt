@@ -1,31 +1,6 @@
-fetch to 
+When {address, columnId} changes, 
+put data to {price, priceId}, {estimate, zestimateId}, {rent estimate, rentZestimateId}, {tax value, taxAssessedValueId}, {lot value, lotAreaValueId}
 
-{price, priceId}, 
+put data to {latitude, latitudeId}, {longitude, longitudeId}, {image, imageId}
 
-{latitude, latId}, 
-
-{longitude, lngId}, 
-
-{date sold, dateSoldId}, 
-
-{bathrooms, bathroomsId}, 
-
-{bedrooms, bedroomsId}, 
-
-{living area size, livingAreaId}, 
-
-{home type, homeTypeId}, 
-
-{home status, homeStatusId}, 
-
-{image, imageId}, 
-
-{estimate, zestimateId}, 
-
-{rent estimate, rentZestimateId}, 
-
-{tax assessed value, taxAssessedValueId}, 
-
-{lot area value, lotAreaValueId}, 
-
-{lot area unit, lotAreaUnitId}
+put data to {bathrooms, bathroomsId}, {bedrooms, bedroomsId}, {living area, livingAreaId}, {home type, homeTypeId}, {status, homeStatusId}
