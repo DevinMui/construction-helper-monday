@@ -1,0 +1,31 @@
+fetch to 
+
+{price, priceId}, 
+
+{latitude, latId}, 
+
+{longitude, lngId}, 
+
+{date sold, dateSoldId}, 
+
+{bathrooms, bathroomsId}, 
+
+{bedrooms, bedroomsId}, 
+
+{living area size, livingAreaId}, 
+
+{home type, homeTypeId}, 
+
+{home status, homeStatusId}, 
+
+{image, imageId}, 
+
+{estimate, zestimateId}, 
+
+{rent estimate, rentZestimateId}, 
+
+{tax assessed value, taxAssessedValueId}, 
+
+{lot area value, lotAreaValueId}, 
+
+{lot area unit, lotAreaUnitId}
