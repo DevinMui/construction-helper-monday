@@ -13,16 +13,30 @@ API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjkyMDUxNTQwLCJ1aWQiOjE0ODgwMzE4LCJpYW
 
 MONDAY_ENDPOINT = "https://api.monday.com/v2"
 
+HEADERS = {"Authorization": API_TOKEN}
+
+# Zillow Integration
+def price_history():
+    pass
+
+
+def walk_score():
+    pass
+
 
 @app.route("/", methods=["POST"])
 def search():
     body = request.json
 
     # parse monday request
-    values = body["payload"]["inboundFieldValues"]
-    board_id = values["boardId"]
-    item_id = values["itemId"]
-    address = values["addressValue"]
+    payload = body["payload"]["inboundFieldValues"]
+    board_id = payload["boardId"]
+    item_id = payload["itemId"]
+    address = payload["addressValue"]
+
+    create_subitem(
+        item_id,
+    )
 
     # data wanted from zillow
     params = [
@@ -48,17 +62,27 @@ def search():
     # get column labels
     columns = {}
     for param in params:
-        if param + "Id" in values:
-            columns[param] = values.get(param + "Id", None)
+        if param + "Id" in payload:
+            columns[param] = payload.get(param + "Id", None)
 
-    values = zillow_api.search(address).json()
-    # values = json.loads(open("./zillow/search.json", "r").read())
+    # values = zillow_api.search(address).json()
+    values = json.loads(open("./zillow/search.json", "r").read())
 
     # parse zillow response
     values = values["cat1"]["searchResults"]["mapResults"]
     if not len(values):
         return jsonify(res)
+
     values = values[0]["hdpData"]["homeInfo"]
+    zpid = values["zpid"]
+
+    # fetch price history
+    # data -> property -> homeValueChartData -> points[]
+    if "priceHistoryId" in payload:
+        price_history = zillow_api.get_price_history(zpid).json()
+    # fetch walkscore
+    if "walkscoreId" in payload:
+        walkscore = zillow_api.get_walkscore(zpid).json()
 
     # build response values
     column_values = {}
@@ -67,8 +91,19 @@ def search():
 
     print("[column values]", json.dumps(column_values))
 
-    headers = {"Authorization": API_TOKEN}
+    change_multiple_column_values(board_id, item_id, column_values)
 
+    return jsonify(res)
+
+
+def create_subitem(item_id: int, column_values: dict):
+    query = 'mutation ($parent_item_id: Int!, $column_values: JSON!) { create_subitem($parent_item_id, item_name: "Price point", column_values: $column_values) { id }}'
+    variables = {"parent_item_id": item_id, "column_values": json.dumps(column_values)}
+    data = {"query": query, "variables": variables}
+    return post(MONDAY_ENDPOINT, json=data, headers=HEADERS)
+
+
+def change_multiple_column_values(board_id: int, item_id: int, column_values: dict):
     # change multiple column values using GraphQL
     query = "mutation ($board_id: Int!, $item_id: Int!, $column_values: JSON!) { change_multiple_column_values (board_id: $board_id, item_id: $item_id, column_values: $column_values) { id }}"
 
@@ -80,6 +115,4 @@ def search():
 
     data = {"query": query, "variables": variables}
 
-    post(MONDAY_ENDPOINT, json=data, headers=headers)
-
-    return jsonify(res)
+    return post(MONDAY_ENDPOINT, json=data, headers=HEADERS)
