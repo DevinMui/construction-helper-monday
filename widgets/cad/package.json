@@ -14,6 +14,7 @@
         "@material/react-text-field": "^0.15.0",
         "@xeokit/xeokit-sdk": "^1.5.14",
         "monday-sdk-js": "0.0.16",
+        "node-fetch": "^2.6.1",
         "react": "^16.13.0",
         "react-color": "^2.19.3",
         "react-dom": "^16.13.0",

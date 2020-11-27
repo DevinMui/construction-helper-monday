@@ -6,7 +6,7 @@ import { STLLoaderPlugin } from "@xeokit/xeokit-sdk/src/plugins/STLLoaderPlugin/
 import { AnnotationsPlugin } from "@xeokit/xeokit-sdk/src/plugins/AnnotationsPlugin/AnnotationsPlugin.js";
 import Alert from "./Alert";
 import trash2 from "@iconify-icons/feather/trash-2";
-import { Icon, InlineIcon } from "@iconify/react";
+import { InlineIcon } from "@iconify/react";
 import xIcon from "@iconify-icons/feather/x";
 
 function uuid() {
