@@ -3,6 +3,8 @@ import { listenToContext } from "./Api";
 import "./App.css";
 import CAD from "./CAD";
 import FileExplorer from "./FileExplorer";
+import mondaySdk from "monday-sdk-js";
+const monday = mondaySdk();
 
 class App extends React.Component {
   constructor(props) {
@@ -12,25 +14,22 @@ class App extends React.Component {
       itemId: "",
       boardId: "",
       url: "",
+      link: "",
     };
   }
 
   componentDidMount() {
     // Get board ID and items
     listenToContext((boardId) => this.setState({ boardId }));
+    monday.listen("settings", (e) => {
+      this.setState({ link: Object.keys(e.data.link)[0] });
+    });
   }
 
   render() {
     switch (this.state.view) {
       case "CAD":
-        return (
-          <CAD
-            url={this.state.url}
-            itemId={this.state.itemId}
-            columnId={this.state.colId}
-            assetId={this.state.assetId}
-          />
-        );
+        return <CAD {...this.state} />;
       default:
         // 'files' as default
         return (

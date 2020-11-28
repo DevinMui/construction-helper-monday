@@ -60,7 +60,7 @@ class CAD extends React.Component {
         });
         const model = this.stlViewer.load({
           id: "myModel",
-          src: this.props.url,
+          src: this.props.link + this.props.url,
           // metaModelSrc:   "./models/OTCConferenceCenter.json"
         });
         model.on("loaded", () => {
