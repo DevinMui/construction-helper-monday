@@ -59,8 +59,7 @@ class CAD extends React.Component {
     });
     const model = this.stlViewer.load({
       id: "myModel",
-      // src: './response.stl'
-      src: (this.props.link || "") + 'https://files-monday-com.s3.amazonaws.com/6575730/resources/144310873/test.stl?response-content-disposition=attachment&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MPVJMFXPCFHVJDO%2F20201128%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20201128T214008Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=1ae33be48fb1403175988df4df970e2ccb5c2669fc4dd9686f132136a7e21922',
+      src: (this.props.link || "") + this.props.url,
       // metaModelSrc:   "./models/OTCConferenceCenter.json"
     });
     model.on("loaded", () => {
