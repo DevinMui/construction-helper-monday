@@ -11,8 +11,7 @@ class App extends React.Component {
       view: "files",
       itemId: "",
       boardId: "",
-      url:
-        "https://cantina-band-jazz.monday.com/protected_static/6575730/resources/144272689/test.stl",
+      url: "",
     };
   }
 
@@ -28,12 +27,18 @@ class App extends React.Component {
           <CAD
             url={this.state.url}
             itemId={this.state.itemId}
-            columnId={this.state.columnId}
+            columnId={this.state.colId}
+            assetId={this.state.assetId}
           />
         );
       default:
         // 'files' as default
-        return <FileExplorer id={this.state.boardId} />;
+        return (
+          <FileExplorer
+            id={this.state.boardId}
+            onSubmit={(e) => this.setState({ ...e, view: "CAD" })}
+          />
+        );
     }
   }
 }

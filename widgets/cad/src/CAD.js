@@ -60,7 +60,7 @@ class CAD extends React.Component {
         });
         const model = this.stlViewer.load({
           id: "myModel",
-          src: "./test.stl",
+          src: this.props.url,
           // metaModelSrc:   "./models/OTCConferenceCenter.json"
         });
         model.on("loaded", () => {
@@ -75,7 +75,6 @@ class CAD extends React.Component {
           });
           if (pickRecord) {
             const id = uuid();
-            console.log(coords, pickRecord);
     
             this.setState({
               alert: {
@@ -122,7 +121,6 @@ class CAD extends React.Component {
                     icon={trash2}
                     style={{ transform: "scale(1.5)", marginLeft: 8, marginTop: 4 }}
                     onClick={() => {
-                      console.log(this.state.annotation);
                       this.setState({
                         alert: {
                           type: 1,

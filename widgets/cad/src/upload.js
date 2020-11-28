@@ -10,65 +10,28 @@ const upload = async (file, itemId, columnId) => {
   formData.append("variables[file]", file, filename);
 
   var query =
-    'mutation ($file: File!) { add_file_to_column (file: $file, item_id: 881017097, column_id: "files") { id } }';
+    `mutation ($file: File!) { add_file_to_column (file: $file, item_id: ${itemId}, column_id: "${columnId}") { id } }`;
 
   const noVariableQuery = query;
   formData.append("query", noVariableQuery);
 
-  await fetch("https://api.monday.com/v2/", {
-    method: "POST",
-    body: formData,
-    headers: {
-      Authorization: token,
-    },
-  })
-    .then((res) => res.json())
-    .then((response) => console.log(response))
-    .catch((err) => console.log(err));
+  try {
+    let d = await fetch("https://api.monday.com/v2/", {
+      method: "POST",
+      body: formData,
+      headers: {
+        Authorization: token,
+      },
+    });
+    d = await d.json();
+    return d;
+  } catch (e) {
+    alert('There was an error uploading your file. Please try again.');
+  }
 };
 
-// // set URL and boundary
+// set URL and boundary
 // var url = "https://api.monday.com/v2/file";
 // var boundary = "xxxxxxxxxx";
 
-// const upload = async (file) => {
-//   var data = "";
-//   // construct query part
-//   data += "--" + boundary + "\r\n";
-//   data += 'Content-Disposition: form-data; name="query"; \r\n';
-//   data += "Content-Type:application/json\r\n\r\n";
-//   data += "\r\n" + query + "\r\n";
-
-//   // construct file part
-//   data += "--" + boundary + "\r\n";
-//   data +=
-//     'Content-Disposition: form-data; name="variables[file]"; filename="' +
-//     file.name +
-//     '"\r\n';
-//   data += "Content-Type:application/octet-stream\r\n\r\n";
-
-//   const formData = new FormData();
-//   formData.append('file',file)
-
-//   // construct request options
-//   var options = {
-//     method: "post",
-//     headers: {
-//       "Content-Type": "multipart/form-data; boundary=" + boundary,
-//       Authorization: API_KEY,
-//     },
-//     body: formData,
-//   };
-//   // make request
-//   fetch(url, options)
-//     .then((res) => res.json())
-//     .then((json) => console.log(json));
-// };
-
 export default upload;
-
-// // var payload = Buffer.concat([
-// //         Buffer.from(data, "utf8"),
-// //         new Buffer.from(content, 'binary'),
-// //         Buffer.from("\r\n--" + boundary + "--\r\n", "utf8"),
-// // ]);

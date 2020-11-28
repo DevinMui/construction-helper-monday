@@ -43,7 +43,6 @@ const Alert = (props) => {
   const [description, setDescription] = React.useState("");
 
   const action = () => {
-    console.log("[]prop type]", props.type);
 
     if (props.type === "add") {
       props.annotations.createAnnotation({
@@ -62,7 +61,6 @@ const Alert = (props) => {
     }
     props.close();
   };
-  console.log(props);
   return (
     <div className="alert-container" onClick={props.close}>
       <form

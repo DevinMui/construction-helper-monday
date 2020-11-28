@@ -7,20 +7,19 @@ const listenToContext = (cb) => {
   });
 };
 
-// Files
-// -----
-// Store file with item
-// Read file given item
-// Load STL
-
 // Annotations
 // -----
-// Store annotation in table
-// Read associated annotation
-// Delete annotations
+const deleteAnnotation = async (itemId) => {
+  // remove subitem form table
+};
+const getAnnotations = async (itemId) => {
+  // Read subitems
+};
+const createAnnotation = async (itemId, title, description, user) => {
+  // Check for subitem column
+  // formats title, description, user
+};
 
-// Monday
-// -----
 const getSTLItems = async (boardId) => {
   const query = `query {
         boards (ids: ${boardId}){id, name, items {
@@ -40,7 +39,11 @@ const getSTLItems = async (boardId) => {
   for (let item of items) {
     for (let cv of item["column_values"]) {
       if (cv["type"] === "file") {
-        let files = JSON.parse(cv["value"]).files;
+        let files = []
+        try { 
+            let e = JSON.parse(cv["value"]).files;
+            files = e
+        } catch (e) {}
         for (let file of files) {
           if (file.name.endsWith(".stl")) {
             if (!ret[item["name"]]) ret[item["name"]] = [];
@@ -62,14 +65,17 @@ const getSTLItems = async (boardId) => {
   // returns a map as
   // name : [{filename, item id, col id, asset Id}]
 };
-// const g
-// Create hidden column for annotations, files
-// Read items and get files iff exists
-// Write to item
 
-// Choose board
-// Choose item to attach a file (read item if it exists)
-// Create new table for annotations
-// Always get newest file version
+const updateSTL = async () => {
+  // Overwrites existing STL
+  // Rerenders STL after STL uploaded
+};
 
-export { listenToContext, getSTLItems };
+export {
+  listenToContext,
+  getSTLItems,
+  deleteAnnotation,
+  createAnnotation,
+  getAnnotations,
+  updateSTL,
+};
