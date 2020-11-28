@@ -1,12 +1,13 @@
 {
-    "name": "sentiment",
+    "name": "cad",
     "version": "0.0.1",
     "private": true,
     "scripts": {
         "start": "npm run stop && concurrently \"npm run react\" \"npm run expose\"",
-        "expose": "ngrok http 8301",
+        "expose": "ngrok http 3000",
         "react": "react-scripts start",
-        "stop": "kill-port 8301 && kill-port 4049 && kill-port 4040"
+        "build": "react-scripts build",
+        "stop": "kill-port 3000 && kill-port 4049 && kill-port 4040"
     },
     "dependencies": {
         "@iconify-icons/feather": "^1.1.0",

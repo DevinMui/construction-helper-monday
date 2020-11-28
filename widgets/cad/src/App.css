@@ -56,6 +56,24 @@ body {
   margin-right: 8px;
 }
 
+.file-explorer {
+  max-width: 80%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  flex-direction: column;
+  display: flex;
+}
+
+.button-disabled {
+  background-color: #C5C7D0;
+  cursor: not-allowed;
+  color: white;
+}
+
+.button-disabled:hover {
+  background-color: #C5C7D0;
+}
+
 textarea,
 input {
   border-radius: 4px;

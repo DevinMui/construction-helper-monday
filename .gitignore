@@ -1,3 +1,6 @@
+*.stl
+*.zip
+build/
 node_modules/
 */env
 .env
