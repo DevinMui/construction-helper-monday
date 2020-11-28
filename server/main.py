@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
-
+from flask_cors import CORS, cross_origin
+import requests
 from requests import post
 from zillow import api as zillow_api
 
@@ -8,6 +9,8 @@ import os
 import traceback
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 SIGNING_TOKEN = "a330465c01699e22129599e12107fe38"
 API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjkyMDUxNTQwLCJ1aWQiOjE0ODgwMzE4LCJpYWQiOiIyMDIwLTExLTI2VDIzOjU4OjU4LjAwMFoiLCJwZXIiOiJtZTp3cml0ZSJ9.71SM1nsCH-niBQS1wCGGsRF1URyZDj8e7kMvoFqR6zM"
@@ -15,6 +18,17 @@ API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjkyMDUxNTQwLCJ1aWQiOjE0ODgwMzE4LCJpYW
 MONDAY_ENDPOINT = "https://api.monday.com/v2"
 
 HEADERS = {"Authorization": API_TOKEN}
+
+@app.route("/cors", methods=['GET'])
+@cross_origin()
+def cors_endpoint():
+    URL = request.query_string
+    print(URL)
+    r = requests.get(URL)
+    blob = r.content
+    # Send blob back with CORS header 
+    
+    return blob 
 
 # Zillow Integration
 def price_history():
