@@ -5,6 +5,7 @@ from zillow import api as zillow_api
 
 import json
 import os
+import traceback
 
 app = Flask(__name__)
 
@@ -72,19 +73,24 @@ def search():
 
         values = values[0]["hdpData"]["homeInfo"]
         zpid = values["zpid"]
-        # fetch walkscore
-        # if "walkscoreId" in payload:
-        #     walkscore = zillow_api.get_walkscore(zpid).json()
 
         # build response values
         column_values = {}
         for key in columns.keys():
             column_values[columns[key]] = values[key]
 
+        # fetch walkscore
+        if "walkscoreId" in payload:
+            # walkscore = zillow_api.get_walkscore(zpid).json()
+            walkscore = json.loads(open("./zillow/walk.json", "r").read())
+            walkscore = walkscore["data"]["property"]["transitScore"]["transit_score"]
+            column_values[payload["walkscoreId"]] = walkscore
+
         change_multiple_column_values(board_id, item_id, column_values)
 
     except Exception as e:
-        print("[EXCEPTION]", e)
+        print("[EXCEPTION]")
+        traceback.print_exc()
 
     return jsonify(res)
 
@@ -231,4 +237,5 @@ def change_multiple_column_values(board_id: int, item_id: int, column_values: di
 
     r = post(MONDAY_ENDPOINT, json=data, headers=HEADERS)
     res = r.json()
+    print(res)
     return res["data"]["change_multiple_column_values"]

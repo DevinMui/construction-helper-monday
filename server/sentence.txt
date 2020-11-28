@@ -6,3 +6,5 @@ put data to {latitude, latitudeId}, {longitude, longitudeId}, {image, imageId}
 put data to {bathrooms, bathroomsId}, {bedrooms, bedroomsId}, {living area, livingAreaId}, {home type, homeTypeId}, {status, homeStatusId}
 
 put data to subitem
+
+put data to {walkscore, walkscoreId}

@@ -1,0 +1,13 @@
+{
+    "data": {
+        "property": {
+            "id": "UHJvcGVydHk6NjMwNDUzNzA=",
+            "walkScore": null,
+            "transitScore": {
+                "transit_score": 15,
+                "description": "Minimal Transit",
+                "ws_link": "https://www.walkscore.com/score/loc/lat=38.6843/lng=-121.5043/?utm_source=zillow2.com&utm_medium=ts_api&utm_campaign=ts_api"
+            }
+        }
+    }
+}
