@@ -26,94 +26,96 @@ def walk_score():
 
 @app.route("/", methods=["POST"])
 def search():
-    body = request.json
+    try:
+        body = request.json
 
-    # parse monday request
-    payload = body["payload"]["inboundFieldValues"]
-    board_id = payload["boardId"]
-    item_id = payload["itemId"]
-    address = payload["addressValue"]
+        # parse monday request
+        payload = body["payload"]["inboundFieldValues"]
+        board_id = payload["boardId"]
+        item_id = payload["itemId"]
+        address = payload["addressValue"]
 
-    # data wanted from zillow
-    params = [
-        "price",
-        "latitude",
-        "longitude",
-        "dateSold",
-        "bathrooms",
-        "bedrooms",
-        "livingArea",
-        "homeType",
-        "homeStatus",
-        "imageLink",
-        "zestimate",
-        "rentZestimate",
-        "taxAssessedValue",
-        "lotAreaValue",
-        "lotAreaUnit",
-    ]
+        # data wanted from zillow
+        params = [
+            "price",
+            "latitude",
+            "longitude",
+            "dateSold",
+            "bathrooms",
+            "bedrooms",
+            "livingArea",
+            "homeType",
+            "homeStatus",
+            "imageLink",
+            "zestimate",
+            "rentZestimate",
+            "taxAssessedValue",
+            "lotAreaValue",
+            "lotAreaUnit",
+        ]
 
-    res = {"status": "ok"}
+        res = {"status": "ok"}
 
-    # get column labels
-    columns = {}
-    for param in params:
-        if param + "Id" in payload:
-            columns[param] = payload.get(param + "Id", None)
+        # get column labels
+        columns = {}
+        for param in params:
+            if param + "Id" in payload:
+                columns[param] = payload.get(param + "Id", None)
 
-    # values = zillow_api.search(address).json()
-    values = json.loads(open("./zillow/search.json", "r").read())
+        # values = zillow_api.search(address).json()
+        values = json.loads(open("./zillow/search.json", "r").read())
 
-    # parse zillow response
-    values = values["cat1"]["searchResults"]["mapResults"]
-    if not len(values):
-        return jsonify(res)
+        # parse zillow response
+        values = values["cat1"]["searchResults"]["mapResults"]
+        if not len(values):
+            return jsonify(res)
 
-    values = values[0]["hdpData"]["homeInfo"]
-    zpid = values["zpid"]
+        values = values[0]["hdpData"]["homeInfo"]
+        zpid = values["zpid"]
+        # fetch walkscore
+        # if "walkscoreId" in payload:
+        #     walkscore = zillow_api.get_walkscore(zpid).json()
 
-    # fetch price history
-    # data -> property -> homeValueChartData -> points[]
-    # if "priceHistoryId" in payload:
-    #     fetch_price_history_to_monday(board_id, item_id, "priceHistoryId", zpid)
-    # fetch walkscore
-    # if "walkscoreId" in payload:
-    #     walkscore = zillow_api.get_walkscore(zpid).json()
+        # build response values
+        column_values = {}
+        for key in columns.keys():
+            column_values[columns[key]] = values[key]
 
-    # build response values
-    column_values = {}
-    for key in columns.keys():
-        column_values[columns[key]] = values[key]
+        change_multiple_column_values(board_id, item_id, column_values)
 
-    change_multiple_column_values(board_id, item_id, column_values)
+    except Exception as e:
+        print("[EXCEPTION]", e)
 
     return jsonify(res)
 
 
 @app.route("/price-history", methods=["POST"])
 def fetch_price_history():
-    body = request.json
+    try:
+        body = request.json
 
-    # parse monday request
-    payload = body["payload"]["inboundFieldValues"]
-    board_id = payload["boardId"]
-    item_id = payload["itemId"]
-    address = payload["addressValue"]
+        # parse monday request
+        payload = body["payload"]["inboundFieldValues"]
+        board_id = payload["boardId"]
+        item_id = payload["itemId"]
+        address = payload["addressValue"]
 
-    res = {"status": "ok"}
+        res = {"status": "ok"}
 
-    # values = zillow_api.search(address).json()
-    values = json.loads(open("./zillow/search.json", "r").read())
+        # values = zillow_api.search(address).json()
+        values = json.loads(open("./zillow/search.json", "r").read())
 
-    # parse zillow response
-    values = values["cat1"]["searchResults"]["mapResults"]
-    if not len(values):
-        return jsonify(res)
+        # parse zillow response
+        values = values["cat1"]["searchResults"]["mapResults"]
+        if not len(values):
+            return jsonify(res)
 
-    values = values[0]["hdpData"]["homeInfo"]
-    zpid = values["zpid"]
+        values = values[0]["hdpData"]["homeInfo"]
+        zpid = values["zpid"]
 
-    fetch_price_history_to_monday(board_id, item_id, zpid)
+        fetch_price_history_to_monday(board_id, item_id, zpid)
+    except Exception as e:
+        print("[EXCEPTION]", e)
     return jsonify(res)
 
 
@@ -155,7 +157,13 @@ def fetch_price_history_to_monday(board_id: int, item_id: int, zid: int):
             columns[label] = column_id
 
     # add subitems
+    num_data_pts = 15 * 4
     for i, price in enumerate(price_history):
+        if i < len(price_history) - num_data_pts:
+            continue
+        # get month by month data rather than weekly
+        if i % 4 == 0:
+            continue
         column_values = {
             columns[labels[0]]: price["x"],
             columns[labels[1]]: price["y"],
