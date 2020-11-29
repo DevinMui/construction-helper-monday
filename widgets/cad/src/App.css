@@ -43,6 +43,7 @@ body {
 .button-row {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   margin-bottom: 4px;
   margin-top: 4px;
 }
@@ -103,6 +104,8 @@ input {
 .button-important {
   color: white;
   background: #0085ff;
+  padding-bottom: 8px;
+  padding-top: 8px;
 }
 
 .button-important:hover {

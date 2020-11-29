@@ -15,6 +15,7 @@ class App extends React.Component {
       boardId: "",
       url: "",
       link: "",
+      assetId: ""
     };
   }
 

@@ -58,7 +58,7 @@ class CAD extends React.Component {
       viewer.cameraFlight.flyTo(annotation);
     });
     const model = this.stlViewer.load({
-      id: "myModel",
+      id: uuid(),
       src: (this.props.link || "") + this.props.url,
       // metaModelSrc:   "./models/OTCConferenceCenter.json"
     });
@@ -74,13 +74,16 @@ class CAD extends React.Component {
       });
       if (pickRecord) {
         const id = uuid();
-
+        console.log(pickRecord)
         this.setState({
           alert: {
             type: "add",
             annotations: this.annotations,
             info: {
-              pickRecord,
+              pickRecord: {
+                worldPos: pickRecord.worldPos,
+                worldNormal: pickRecord.worldNormal
+              },
               id,
             },
           },
@@ -158,6 +161,8 @@ class CAD extends React.Component {
         {this.state.alert && (
           <Alert
             {...this.state.alert}
+            assetId={this.props.assetId}
+            itemId={this.props.itemId}
             close={() => {
               this.setState({ alert: false });
             }}
