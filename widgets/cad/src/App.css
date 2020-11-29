@@ -194,3 +194,12 @@ button {
   min-width: 60px;
   flex-grow: 1;
 }
+
+textarea[placeholder="Description"] {
+  min-height: 7rem;
+}
+
+.char-counter {
+  margin-bottom: -1.5rem;
+  opacity: 0.5;
+}

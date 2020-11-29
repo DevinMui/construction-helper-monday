@@ -43,9 +43,12 @@ const Alert = (props) => {
   const [color, setColor] = React.useState("grey");
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false)
+  const checkboxRef = React.useRef(null);
 
   const action = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
     try {
       let me = await monday.api(`query { me { name } }`);
       me = me.data.me.name;
@@ -76,6 +79,7 @@ const Alert = (props) => {
             type: "error",
             timeout: 10000,
           });
+          setIsLoading(false)
           return;
         }
         query = `query {
@@ -116,11 +120,11 @@ const Alert = (props) => {
         let metaExists = false;
         for (let c of q) {
           if (c.title === "Description" && c.type === "long-text") {
-            descriptionExists = true
+            descriptionExists = true;
             descriptionId = c.id;
           }
           if (c.title === "Metadata" && c.type === "long-text") {
-            metaExists = true
+            metaExists = true;
             metadataId = c.id;
           }
         }
@@ -132,7 +136,7 @@ const Alert = (props) => {
             type: "error",
             timeout: 10000,
           });
-
+          setIsLoading(false)
           return;
         }
         if (!metaExists) {
@@ -142,7 +146,7 @@ const Alert = (props) => {
             type: "error",
             timeout: 10000,
           });
-
+          setIsLoading(false)
           return;
         }
 
@@ -151,7 +155,11 @@ const Alert = (props) => {
         vals[metadataId] = JSON.stringify({
           ...props.info,
           timestamp: Date.now(),
-          assetId: props.assetId,
+          assetId: checkboxRef.current
+            ? checkboxRef.current.checked
+              ? "all"
+              : props.assetId
+            : "all",
           author: me,
           occludable: true,
           values: {
@@ -190,7 +198,10 @@ const Alert = (props) => {
       }
       props.close();
     } catch (e) {
-      const message = props.type === 'add' ? 'An error occurred while adding your annotation. Please try again.':'An error occurred while deleting your annotation. Please try again.'
+      const message =
+        props.type === "add"
+          ? "An error occurred while adding your annotation. Please try again."
+          : "An error occurred while deleting your annotation. Please try again.";
       monday.execute("notice", {
         message,
         type: "error",
@@ -198,6 +209,7 @@ const Alert = (props) => {
       });
       console.error(e);
     }
+    setIsLoading(false)
   };
   return (
     <div className="alert-container" onClick={props.close}>
@@ -206,7 +218,7 @@ const Alert = (props) => {
         onClick={(e) => e.stopPropagation()}
         onSubmit={action}
       >
-        <h1>{props.type === "add" ? "Add Annotation" : "Delete Annotation"}</h1>
+        <h1>{props.type === "add" ? "" : "Delete Annotation"}</h1>
         {props.type !== "add" && (
           <p>Are you sure you want to delete this annotation?</p>
         )}
@@ -217,6 +229,27 @@ const Alert = (props) => {
               flexDirection: "column",
             }}
           >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: 16,
+              }}
+            >
+              <h1 style={{ flexGrow: 1, marginBottom: 0 }}>Add annotation</h1>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                  alignSelf: "flex-end",
+                  marginTop: "-1rem",
+                }}
+              >
+                <input type="checkbox" id="show-all-screens" ref={checkboxRef}></input>
+                <label htmlFor="show-all-screens" style={{marginLeft: 4}}>Show on all versions</label>
+              </div>
+            </div>
             <div className="button-row">
               <div
                 onClick={() => setColorOpen(true)}
@@ -259,6 +292,7 @@ const Alert = (props) => {
 
             <textarea
               placeholder="Description"
+              maxLength={1500}
               onClick={() => {
                 setColorOpen(false);
               }}
@@ -266,9 +300,13 @@ const Alert = (props) => {
               value={description}
               required
             />
+            <div className="char-counter">{description.length}/1500</div>
           </div>
         )}
-        <div className="button-row">
+        {
+          // TODO: add loader here
+        }
+        <div className="button-row" style={{visibility: isLoading? 'hidden': 'visible'}}>
           <div className="button" onClick={props.close}>
             Cancel
           </div>

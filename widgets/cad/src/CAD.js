@@ -4,7 +4,6 @@ import { Viewer } from "@xeokit/xeokit-sdk/src/viewer/Viewer.js";
 import { STLLoaderPlugin } from "@xeokit/xeokit-sdk/src/plugins/STLLoaderPlugin/STLLoaderPlugin.js";
 import { AnnotationsPlugin } from "@xeokit/xeokit-sdk/src/plugins/AnnotationsPlugin/AnnotationsPlugin.js";
 import Alert from "./Alert";
-import trash2 from "@iconify-icons/feather/trash-2";
 import { InlineIcon } from "@iconify/react";
 import xIcon from "@iconify-icons/feather/x";
 import mondaySdk from "monday-sdk-js";
@@ -100,6 +99,7 @@ class CAD extends React.Component {
       for (const id of subtaskIds) {
         query = `query {
           items(ids:${id}) {
+            name
             column_values {
               value
               type 
@@ -108,6 +108,7 @@ class CAD extends React.Component {
           }
         }`;
         let val = await monday.api(query);
+        const n = val.data.items[0].name
         val = val.data.items[0].column_values;
         let dss = "";
         let annotation = { description: "" };
@@ -128,7 +129,9 @@ class CAD extends React.Component {
             console.log("dss2", dss);
             o.description = `${dss} (created by ${author} at ${timestamp.toLocaleString()})`;
             o.values.description = o.description;
-            if (o.assetId === this.props.assetId) annotations.push(o);
+            o.values.title = n
+            if (o.assetId === this.props.assetId || o.assetId === "all")
+              annotations.push(o);
           }
         }
       }
