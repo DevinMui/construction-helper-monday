@@ -192,4 +192,5 @@ button {
 
 .annotation-grounded .annotation-title {
   min-width: 60px;
+  flex-grow: 1;
 }

@@ -78,7 +78,6 @@ const Alert = (props) => {
           });
           return;
         }
-        console.log(itemsCol);
         query = `query {
           boards {
             items(ids: ${props.itemId}) {
@@ -93,12 +92,10 @@ const Alert = (props) => {
         `;
         q = await monday.api(query);
         q = q.data.boards;
-        console.log('q', q)
         let linkPulse = "";
         for (let item of q) {
           if (item.items.length > 0) {
             const v = item.items[0].column_values[0].value;
-            console.log(v);
             linkPulse = JSON.parse(v).linkedPulseIds[0].linkedPulseId;
           }
         }
@@ -115,7 +112,6 @@ const Alert = (props) => {
         }`;
         q = await monday.api(query);
         q = q.data.items[0].column_values;
-        console.log(q)
         let descriptionExists = false;
         let metaExists = false;
         for (let c of q) {
@@ -155,13 +151,12 @@ const Alert = (props) => {
         vals[metadataId] = JSON.stringify({
           ...props.info,
           timestamp: Date.now(),
-          assetID: props.assetID,
+          assetId: props.assetId,
           author: me,
           occludable: true,
           values: {
             glyph: "🐻",
             title: title,
-            description: description,
             labelBGColor: color,
           },
         });
@@ -178,7 +173,6 @@ const Alert = (props) => {
           }
         }
       }`;
-        console.log(query);
         await monday.api(query);
         props.annotations.createAnnotation({
           ...props.info,
