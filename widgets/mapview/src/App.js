@@ -35,16 +35,17 @@ function distance(a, b) {
 const PropertyCard = (props) => {
     const p = props.property
     console.log(p)
-    console.log('p', p["anomaliness"])
+    console.log('p', p['anomaliness'])
     return (
         <div className="property-card" id={props.id}>
             <div className="row">
                 <div className="prop-title">{p.name}</div>
-                <div className="prop-price"></div>
-                ${Math.round(p.price/1000)}K
+                <div className="prop-price"></div>${Math.round(p.price / 1000)}K
             </div>
             <div className="prop-address">{p.address}</div>
-            <div className="prop-anomaly">Anomaly Score: {Number(p.anomaliness).toFixed(2)}</div>
+            <div className="prop-anomaly">
+                Anomaly Score: {Number(p.anomaliness).toFixed(2)}
+            </div>
         </div>
     )
     // Name
@@ -73,8 +74,8 @@ function App() {
     const [properties, setProperties] = useState([])
     const [activeMarker, setActiveMarker] = useState({ id: '' })
     const [count, setCount] = useState(5)
-    const [maxDistance, setMaxDistance] = useState(10)
-    const [sensitivity, setSensitivity] = useState(1)
+    const [maxDistance, setMaxDistance] = useState(10) // Divide by 10
+    const [sensitivity, setSensitivity] = useState(0.5) // Divide by 100
 
     useEffect(() => {
         if (boardId !== null) {
@@ -133,8 +134,8 @@ function App() {
                         id
                     }
                     */
-                    
-                    const tree = (new kdTree(p, distance, ['lat', 'lng']))
+
+                    const tree = new kdTree(p, distance, ['lat', 'lng'])
 
                     for (let i = 0; i < p.length; i = +i + (i === i)) {
                         let prop = p[i]
@@ -144,14 +145,21 @@ function App() {
                             .nearest(prop, 1 + count, maxDistance)
                             .map((i) => i[0])
                         let prices = nearest.map((i) => i.price)
-                        const mean = prices.reduce((a, b) => a + b) / prices.length
-                        // abs (difference to mean/(mean * (sensitivity scaling factor)))
-                        anomaliness = Math.abs((mean - prop.price) / (mean * sensitivity))
+                        const mean =
+                            prices.reduce((a, b) => a + b) / prices.length
+                        const percent_diff = Math.abs(prop.price - mean) / mean
+                        anomaliness =
+                            1 /
+                            (1 +
+                                Math.pow(
+                                    Math.E,
+                                    1 - 0.5 - sensitivity + -2 * percent_diff
+                                ))
                         prop.anomaliness = nearest.length
                             ? Math.min(1, Math.max(0, anomaliness))
                             : 0
                     }
-            
+
                     setProperties(p)
                 } catch (e) {
                     console.error(e)
@@ -168,7 +176,34 @@ function App() {
                 setBoardId(res.data.boardId)
             })
         }
-    }, [boardId])
+    }, [boardId, count, maxDistance, sensitivity])
+
+    useEffect(() => {
+        monday.listen('settings', ({ data }) => {
+            const { sensitivity, count, range } = data
+            if (count.length !== '') {
+                const c = Number(count)
+                if (c + '' === count && c >= 1 && c <= 100) {
+                    console.log('c', c)
+                    setCount(Math.ceil(c / 10))
+                }
+            }
+            if (sensitivity.length !== '') {
+                const s = Number(sensitivity)
+                if (s + '' === sensitivity && s >= 1 && s <= 100) {
+                    console.log('s', s)
+                    setSensitivity(s / 100)
+                }
+            }
+            if (range.length !== '') {
+                const r = Number(range)
+                if (r + '' === range && r > 0) {
+                    console.log('r', r)
+                    setMaxDistance(r)
+                }
+            }
+        })
+    }, [])
 
     return (
         <>
@@ -205,8 +240,14 @@ function App() {
                                 lat={v.lat}
                                 clicked={activeMarker.id === v.id}
                                 onClick={() => {
-                                    const e = document.querySelector(`#property-${v.id}`)
-                                    e.scrollIntoView({block: "start", inline: "nearest", behavior: 'smooth'})
+                                    const e = document.querySelector(
+                                        `#property-${v.id}`
+                                    )
+                                    e.scrollIntoView({
+                                        block: 'start',
+                                        inline: 'nearest',
+                                        behavior: 'smooth',
+                                    })
                                     setActiveMarker(v)
                                 }}
                                 lng={v.lng}
