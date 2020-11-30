@@ -98,7 +98,9 @@ def all_search():
             # build response values
             column_values = {}
             for key in columns.keys():
-                column_values[columns[key]] = value[key]
+                val = value.get(key, None)
+                if val:
+                    column_values[columns[key]] = val
 
             create_item(board_id, group_id, item_name, column_values)
 
@@ -160,7 +162,9 @@ def single_search():
         # build response values
         column_values = {}
         for key in columns.keys():
-            column_values[columns[key]] = values[key]
+            val = values.get(key, None)
+            if val:
+                column_values[columns[key]] = val
 
         # fetch walkscore
         if "walkscoreId" in payload:
