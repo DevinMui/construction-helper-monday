@@ -5,11 +5,22 @@ import mondaySdk from "monday-sdk-js";
 import { Card } from '@material-ui/core';
 import { ResponsiveLine } from '@nivo/line';
 import { ResponsiveCalendar } from '@nivo/calendar';
-import calendarData from './calData.js'
+import sk from './calData.js'
 
 const monday = mondaySdk();
 
-
+let calendarData = [
+    [
+        {
+        "day": "2017-08-23",
+        "value": 397
+        },
+        {
+            "day": "2017-08-04",
+            "value": 79
+        }
+    ], [],[],[]
+];
 
 let data2 = [
     {
@@ -119,168 +130,6 @@ let data2 = [
                 "y": 113
             }
         ]
-    },
-    {
-        "id": "us",
-        "color": "hsl(217, 70%, 50%)",
-        "data": [
-            {
-                "x": "plane",
-                "y": 274
-            },
-            {
-                "x": "helicopter",
-                "y": 34
-            },
-            {
-                "x": "boat",
-                "y": 62
-            },
-            {
-                "x": "train",
-                "y": 26
-            },
-            {
-                "x": "subway",
-                "y": 85
-            },
-            {
-                "x": "bus",
-                "y": 48
-            },
-            {
-                "x": "car",
-                "y": 297
-            },
-            {
-                "x": "moto",
-                "y": 46
-            },
-            {
-                "x": "bicycle",
-                "y": 294
-            },
-            {
-                "x": "horse",
-                "y": 244
-            },
-            {
-                "x": "skateboard",
-                "y": 186
-            },
-            {
-                "x": "others",
-                "y": 194
-            }
-        ]
-    },
-    {
-        "id": "germany",
-        "color": "hsl(240, 70%, 50%)",
-        "data": [
-            {
-                "x": "plane",
-                "y": 273
-            },
-            {
-                "x": "helicopter",
-                "y": 214
-            },
-            {
-                "x": "boat",
-                "y": 69
-            },
-            {
-                "x": "train",
-                "y": 206
-            },
-            {
-                "x": "subway",
-                "y": 259
-            },
-            {
-                "x": "bus",
-                "y": 267
-            },
-            {
-                "x": "car",
-                "y": 255
-            },
-            {
-                "x": "moto",
-                "y": 179
-            },
-            {
-                "x": "bicycle",
-                "y": 257
-            },
-            {
-                "x": "horse",
-                "y": 62
-            },
-            {
-                "x": "skateboard",
-                "y": 257
-            },
-            {
-                "x": "others",
-                "y": 173
-            }
-        ]
-    },
-    {
-        "id": "norway",
-        "color": "hsl(286, 70%, 50%)",
-        "data": [
-            {
-                "x": "plane",
-                "y": 60
-            },
-            {
-                "x": "helicopter",
-                "y": 235
-            },
-            {
-                "x": "boat",
-                "y": 128
-            },
-            {
-                "x": "train",
-                "y": 39
-            },
-            {
-                "x": "subway",
-                "y": 211
-            },
-            {
-                "x": "bus",
-                "y": 278
-            },
-            {
-                "x": "car",
-                "y": 200
-            },
-            {
-                "x": "moto",
-                "y": 234
-            },
-            {
-                "x": "bicycle",
-                "y": 258
-            },
-            {
-                "x": "horse",
-                "y": 66
-            },
-            {
-                "x": "skateboard",
-                "y": 134
-            },
-            {
-                "x": "others",
-                "y": 259
-            }
-        ]
     }
 ];
 
@@ -288,8 +137,13 @@ var tooltipScatter = function (x, y) {
     return "x: " + x + " y: " + y;
 };
 
-
-
+//let mappy = new Map();
+var setty = [];
+var homeNumber = 0;
+var nameArray = [];
+var promises = [];
+var propertyArray = [];
+var calendarArray = [];
 var tempDataPoint = {};
 var colorArray = ["hsl(36, 70%, 50%)", "hsl(170, 70%, 50%)", "hsl(217, 70%, 50%)", "hsl(240, 70%, 50%)", "hsl(286, 70%, 50%)"];
 
@@ -308,11 +162,137 @@ class data {
 
 class App extends React.Component {
 
-    async parsePricePoint(variable, aDataPoint) {
-        tempDataPoint.x = variable["items"][0]["column_values"][3]["value"];
-        tempDataPoint.y = variable["items"][0]["column_values"][4]["value"];
-        console.log(tempDataPoint);
-        aDataPoint.push(tempDataPoint);
+    subCalendarItem(dataVar, address) {
+        
+        var length = dataVar["length"];
+        if (length != 0) {
+            var endDate = new Date(dataVar[length - 1]["day"]);
+            var startDate = new Date(dataVar[0]["day"]);
+            return (<div style={{ height: 500 }}>
+                <div >
+                    <h2>
+                        {address}
+                    </h2>
+                </div>
+                <ResponsiveCalendar
+                    data={dataVar}
+                    from={dataVar[0]["day"]}
+                    to={dataVar[length - 1]["day"]}
+                    emptyColor="#eeeeee"
+                    colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
+                    margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+                    yearSpacing={40}
+                    minValue={dataVar[0]["value"]}
+                    maxValue={dataVar[length - 1]["value"]}
+                    monthBorderColor="#ffffff"
+                    dayBorderWidth={2}
+                    dayBorderColor="#ffffff"
+                    legends={[
+                        {
+                            anchor: 'bottom-right',
+                            direction: 'row',
+                            translateY: 36,
+                            itemCount: 4,
+                            itemWidth: 42,
+                            itemHeight: 36,
+                            itemsSpacing: 14,
+                            itemDirection: 'right-to-left'
+                        }
+                    ]}
+                />
+            </div>);
+        }
+        else {
+            return (<div></div>);
+        }
+        
+    }
+    renderCalendarItems() {
+
+        
+        var returnObj =[];
+        var i = 0; 
+        for (i = 0; i < homeNumber; i++) {
+            var dataVar = calendarData[i];
+            returnObj.push(this.subCalendarItem(dataVar, nameArray[i]));
+        
+            //returnObj +=" <div style={{ height: 400 }}>" + 
+            //                " <ResponsiveCalendar" +
+            //                    "data = {" + dataVar + "}" +
+            //                    "from = \"2015 - 03 - 01\"" +
+            //                    "to = \"2016 - 07 - 12\"" +
+            //                    "emptyColor = \"#eeeeee\"" +
+            //                    "colors = { ['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}" +
+            //                    "margin = {{ top: 40, right: 40, bottom: 40, left: 40 }}" +
+            //                    "yearSpacing = { 40}" +
+            //                    "minValue={ 350000 }" +
+            //                    "maxValue = { 400000}" +
+            //                    "monthBorderColor = \"#ffffff\"" +
+            //                    "dayBorderWidth = { 2}" +
+            //                    "dayBorderColor = \"#ffffff\"" +
+            //                    "legends = {" +
+            //                        "[{" +
+            //                            "anchor: 'bottom-right'," +
+            //                            "direction: 'row'," +
+            //                            "translateY: 36," +
+            //                            "itemCount: 4," +
+            //                            "itemWidth: 42," +
+            //                            "itemHeight: 36," +
+            //                            "itemsSpacing: 14," +
+            //                            "itemDirection: 'right-to-left'" +
+            //                        "}]}" +
+            //                " /></div> ";
+        }
+        return returnObj;
+    }
+    
+    parsePricePoint(variable, aDataPoint, address) {
+        var k, n, m = 0; 
+        for (n = 0; n < homeNumber; n++) {
+            var property = { id: nameArray[n], color: colorArray[n], data:[]};
+            propertyArray[n] = property;
+            calendarArray[n] = [];
+        }
+
+        for (k = 0; k < variable["length"]; k++) {
+            variable[k].then(res =>
+            {
+                var idValue = res.data["items"][0]["id"];
+                n = 0;
+                var found = false;
+                for (n = 0; n < homeNumber; n++) {
+                    for (var it = setty[n].values(), val = null; val = it.next().value;) {
+                        if (val == idValue) {
+                            found = true;
+                        }
+                    }
+                    if (found) {
+                        break;
+                    }
+                }
+                if (!res.data["items"][0]["column_values"][3]["value"] || !res.data["items"][0]["column_values"][4]["value"]) {
+                    ;
+                }
+                else {
+                    var d = new Date(parseInt(res.data["items"][0]["column_values"][3]["value"].replaceAll('"', ''), 10)); // The 0 there is the key, which sets the date to the epoch
+                    var month = ("0" + (d.getMonth() + 1)).slice(-2)
+                    var day = d.getUTCDate();
+                    var year = d.getUTCFullYear();
+                    var newdate = month + "/" + day + "/" + year;
+                    var caldate = year + "-" + month + "-" + day;
+                    propertyArray[n].data.push({ x: newdate, y: (res.data["items"][0]["column_values"][4]["value"].replaceAll('"', '')) });
+                    calendarArray[n].push({ day: caldate, value: parseInt((res.data["items"][0]["column_values"][4]["value"].replaceAll('"', '')), 10) });
+                }
+                if (m == (variable["length"] - 1)) {
+                    data2 = propertyArray;
+                    this.setState({ data2: propertyArray });
+                    this.setState({ calendarData: calendarArray });
+                    calendarData = calendarArray;
+                }
+                m++;
+               
+            });
+        }
     }
 
     parseData(variable) {
@@ -320,30 +300,32 @@ class App extends React.Component {
         var allHomePrices = [];
         var i, j;
         var propertyArray = [];
-        for (i = 0; i < allHomes["length"]; i++)
+        homeNumber = allHomes["length"];
+        for (i = 0; i < homeNumber; i++)
         {
             var aDataPoint = [];
             var oneHomeJson = allHomes[i]["column_values"];
             var pricePoints = oneHomeJson["14"]["value"];
             var address = oneHomeJson["0"]["value"];
             var jsonParsedPricePoints = JSON.parse(pricePoints);
-            //console.log(jsonParsedPricePoints["linkedPulseIds"]["length"]);
+            var listOfIDs = [];
+            var subset = new Set();
+            nameArray.push(address);
             for (j = 0; j < jsonParsedPricePoints["linkedPulseIds"]["length"]; j++) {
                 var subtableID = jsonParsedPricePoints["linkedPulseIds"][j]["linkedPulseId"];
-                
+                subset.add(subtableID);
                 var query = "query { items(ids: " + subtableID + ") { id column_values { id type value } } }";
                 var dataPoint = new data("", "");
-                var exper = "hi";
-                monday.api(query).then(res => { this.parsePricePoint(res.data, aDataPoint); });
-                console.log(exper);
+                promises.push(monday.api(query)); //(res => { this.parsePricePoint(res.data, aDataPoint); });
                 
             }
-            var property = {id: address, color: colorArray[i], data: aDataPoint};
-            propertyArray.push(property);
+            setty[i] = subset;
+            Promise.all(promises).then(res => { this.parsePricePoint(promises, aDataPoint, address, ); });
+            
         }
-        console.log(data2);
-        console.log(propertyArray);
-        data2 = propertyArray;
+        //console.log(data2);
+        //console.log(propertyArray);
+        //data2 = propertyArray;
     }
 
     constructor(props) {
@@ -354,6 +336,8 @@ class App extends React.Component {
             settings: {},
             name: "",
             boardData: {},
+            data2: [],
+            calendarData: [],
         };
     }
 
@@ -455,35 +439,11 @@ class App extends React.Component {
                         ]}
                     />
                 </div>
-
-                <div style={{ height: 400 }}>
-                    <ResponsiveCalendar
-                        data={calendarData}
-                        from="2015-03-01"
-                        to="2016-07-12"
-                        emptyColor="#eeeeee"
-                        colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
-                        margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
-                        yearSpacing={40}
-                        monthBorderColor="#ffffff"
-                        dayBorderWidth={2}
-                        dayBorderColor="#ffffff"
-                        legends={[
-                            {
-                                anchor: 'bottom-right',
-                                direction: 'row',
-                                translateY: 36,
-                                itemCount: 4,
-                                itemWidth: 42,
-                                itemHeight: 36,
-                                itemsSpacing: 14,
-                                itemDirection: 'right-to-left'
-                            }
-                        ]}
-                    />
-                </div>
+                
+                
+           
+                {this.renderCalendarItems()}
             </div>
-
         );
     }
 }
