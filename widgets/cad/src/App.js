@@ -15,6 +15,7 @@ class App extends React.Component {
       boardId: "",
       url: "",
       link: "",
+      assetId: ""
     };
   }
 
@@ -22,7 +23,8 @@ class App extends React.Component {
     // Get board ID and items
     listenToContext((boardId) => this.setState({ boardId }));
     monday.listen("settings", (e) => {
-      this.setState({ link: Object.keys(e.data.link)[0] });
+      console.log(e.data.link)
+      this.setState({ link: e.data.link });
     });
   }
 
