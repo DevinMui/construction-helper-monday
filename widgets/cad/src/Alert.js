@@ -246,8 +246,8 @@ const Alert = (props) => {
                   marginTop: "-1rem",
                 }}
               >
-                <input type="checkbox" id="show-all-screens" ref={checkboxRef}></input>
-                <label htmlFor="show-all-screens" style={{marginLeft: 4}}>Show on all versions</label>
+                <input type="checkbox" id="show-all-screens" ref={checkboxRef} style={{ cursor: 'pointer'}}></input>
+                <label htmlFor="show-all-screens" style={{marginLeft: 4, cursor: 'pointer'}}>Show on all versions</label>
               </div>
             </div>
             <div className="button-row">

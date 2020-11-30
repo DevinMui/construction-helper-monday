@@ -113,6 +113,7 @@ input {
 }
 
 .alert-container {
+  position: absolute;
   background: rgba(0, 0, 0, 0.5);
   pointer-events: auto;
   padding: 0.5rem;
@@ -207,6 +208,8 @@ textarea[placeholder="Description"] {
 .price {
   position: fixed;
   margin: 8px;
+  transition: 0.5s all;
+  overflow-y: hidden;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
@@ -245,6 +248,15 @@ h4 {
   padding-top: 12px;
   margin-top: 6px;
   padding-bottom: 12px;
+}
+
+#upload-icon {
+  transition: 0.25s all;
+  opacity: 0.5;
+}
+
+#upload-icon:hover {
+  opacity: 0.8
 }
 
 .price .est-cost-row {

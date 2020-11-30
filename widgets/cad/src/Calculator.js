@@ -1,5 +1,8 @@
 import React from "react";
 import Select from "react-select";
+import { Icon } from "@iconify/react";
+import chevronUp from "@iconify-icons/feather/chevron-up";
+import chevronDown from "@iconify-icons/feather/chevron-down";
 
 const NodeSTL = require("node-stl");
 
@@ -45,9 +48,9 @@ const materials = [
 
 const Calculator = (props) => {
   const [volume, setVolume] = React.useState(1);
-  const [materialCost, setMaterialCost] = React.useState(1);
+  const [materialCost, setMaterialCost] = React.useState(0);
   const [materialUnit, setMaterialUnit] = React.useState(1);
-
+  const [collapsed, setCollapsed] = React.useState(false);
   const [numUnit, setNumUnit] = React.useState(1);
   const materialInputRef = React.useRef(null);
 
@@ -62,14 +65,45 @@ const Calculator = (props) => {
     });
   }, [props.url]);
 
-  console.log({numUnit , materialUnit , materialCost , volume})
-
   return (
-    <div className="price">
+    <div className="price" style={{ height: collapsed ? 36 : "auto" }}>
+      {collapsed ? (
+        <Icon
+          icon={chevronUp}
+          style={{
+            position: "absolute",
+            top: 16,
+            height: 24, 
+            width: 24, 
+            color: 'white',
+            right: 24,
+            cursor: 'pointer'
+          }}
+          onClick={() => setCollapsed(!collapsed)}
+        />
+      ) : (
+        <Icon
+          icon={chevronDown}
+          style={{
+            position: "absolute",
+            top: 16,
+            height: 24, 
+            width: 24, 
+            color: 'white',
+            right: 24,
+            cursor: 'pointer'
+          }}
+          onClick={() => setCollapsed(!collapsed)}
+        />
+      )}
       <h1>Price</h1>
       <h4>STL Units</h4>
       <div className="input-row">
-        <input type="number" onChange={e => setNumUnit(e.target.value)} />
+        <input
+          type="number"
+          onChange={(e) => setNumUnit(e.target.value)}
+          defaultValue={1}
+        />
         <Select
           options={units}
           defaultValue={units[1]}
@@ -101,7 +135,12 @@ const Calculator = (props) => {
       </div>
       <div className="est-cost-row">
         <h3>Est. Cost</h3>
-        <h2>${Math.round((+numUnit) * (+materialUnit) * (+materialCost) * (+volume) * 100)/100}</h2>
+        <h2>
+          $
+          {Math.round(
+            +numUnit * +materialUnit * +materialCost * +volume * 100
+          ) / 100}
+        </h2>
       </div>
     </div>
   );
