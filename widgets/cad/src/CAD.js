@@ -4,9 +4,11 @@ import { Viewer } from "@xeokit/xeokit-sdk/src/viewer/Viewer.js";
 import { STLLoaderPlugin } from "@xeokit/xeokit-sdk/src/plugins/STLLoaderPlugin/STLLoaderPlugin.js";
 import { AnnotationsPlugin } from "@xeokit/xeokit-sdk/src/plugins/AnnotationsPlugin/AnnotationsPlugin.js";
 import Alert from "./Alert";
-import { InlineIcon } from "@iconify/react";
+import Icon, { InlineIcon } from "@iconify/react";
 import xIcon from "@iconify-icons/feather/x";
+import uploadIcon from '@iconify-icons/feather/upload'
 import mondaySdk from "monday-sdk-js";
+import Calculator from "./Calculator";
 const monday = mondaySdk();
 
 function uuid() {
@@ -116,7 +118,6 @@ class CAD extends React.Component {
           if (v.type === "long-text" && v.value && v.title === "Description") {
             annotation.description = JSON.parse(v.value).text;
             dss = JSON.parse(v.value).text;
-            console.log("dss", dss);
           } else if (
             v.type === "long-text" &&
             v.value &&
@@ -126,7 +127,6 @@ class CAD extends React.Component {
             o = JSON.parse(o);
             let timestamp = new Date(o.timestamp);
             let author = o.author;
-            console.log("dss2", dss);
             o.description = `${dss} (created by ${author} at ${timestamp.toLocaleString()})`;
             o.values.description = o.description;
             o.values.title = n
@@ -150,7 +150,7 @@ class CAD extends React.Component {
       this.setState({ annotation });
       viewer.cameraFlight.flyTo(annotation);
     });
-    const model = this.stlViewer.load({
+    const model = this.stlViewer.load({ // TODO: load other things
       id: uuid(),
       src: (this.props.link || "") + this.props.url,
     });
@@ -192,10 +192,11 @@ class CAD extends React.Component {
   }
 
   render() {
-    if (this.viewer) this.viewer.scene.input.setKeyboardEnabled(false);
     return (
       <div className="App" id="app">
+        <Calculator url={(this.props.link || "") + this.props.url}/>
         <canvas ref={this.canvasRef} id="canvas" />
+        {/* <Icon icon={uploadIcon} alt="Upload new version"/> */}
         {this.state.annotation && (
           <div className="annotation-grounded">
             <div
