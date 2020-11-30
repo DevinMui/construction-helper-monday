@@ -6,6 +6,7 @@
         "start": "npm run stop && concurrently \"npm run react\" \"npm run expose\"",
         "expose": "ngrok http 3000",
         "react": "react-scripts start",
+        "zip": "react-scripts build && cd build && 7z a build.zip && cd ..",
         "stop": "kill-port 3000 && kill-port 4049 && kill-port 4040"
     },
     "dependencies": {
