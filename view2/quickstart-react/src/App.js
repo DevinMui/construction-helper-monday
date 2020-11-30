@@ -334,7 +334,7 @@ class App extends React.Component {
                 var query = "query { items(ids: " + subtableID + ") { id column_values { id type value } } }";
                 var dataPoint = new data("", "");
                 var exper = "hi";
-                monday.api(query).then(res => { await this.parsePricePoint(res.data, aDataPoint); exper = res.data; });
+                monday.api(query).then(res => { this.parsePricePoint(res.data, aDataPoint); });
                 console.log(exper);
                 
             }
