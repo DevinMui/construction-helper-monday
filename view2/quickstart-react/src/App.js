@@ -19,7 +19,7 @@ let calendarData = [
             "day": "2017-08-04",
             "value": 79
         }
-    ], [],[],[]
+    ], [], [], [], [], [], [], [], []
 ];
 
 let data2 = [
@@ -85,50 +85,6 @@ let data2 = [
                 "x": "plane",
                 "y": 27
             },
-            {
-                "x": "helicopter",
-                "y": 295
-            },
-            {
-                "x": "boat",
-                "y": 191
-            },
-            {
-                "x": "train",
-                "y": 153
-            },
-            {
-                "x": "subway",
-                "y": 156
-            },
-            {
-                "x": "bus",
-                "y": 237
-            },
-            {
-                "x": "car",
-                "y": 42
-            },
-            {
-                "x": "moto",
-                "y": 125
-            },
-            {
-                "x": "bicycle",
-                "y": 38
-            },
-            {
-                "x": "horse",
-                "y": 247
-            },
-            {
-                "x": "skateboard",
-                "y": 54
-            },
-            {
-                "x": "others",
-                "y": 113
-            }
         ]
     }
 ];
@@ -161,93 +117,134 @@ class data {
 //'query { items(ids: 881258594) { id column_values { id type value } } }'
 
 class App extends React.Component {
+    
 
-    subCalendarItem(dataVar, address) {
-        
-        var length = dataVar["length"];
-        if (length != 0) {
-            var endDate = new Date(dataVar[length - 1]["day"]);
-            var startDate = new Date(dataVar[0]["day"]);
-            return (<div style={{ height: 500 }}>
-                <div >
-                    <h2>
-                        {address}
-                    </h2>
-                </div>
-                <ResponsiveCalendar
-                    data={dataVar}
-                    from={dataVar[0]["day"]}
-                    to={dataVar[length - 1]["day"]}
-                    emptyColor="#eeeeee"
-                    colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
-                    margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
-                    yearSpacing={40}
-                    minValue={dataVar[0]["value"]}
-                    maxValue={dataVar[length - 1]["value"]}
-                    monthBorderColor="#ffffff"
-                    dayBorderWidth={2}
-                    dayBorderColor="#ffffff"
-                    legends={[
-                        {
-                            anchor: 'bottom-right',
-                            direction: 'row',
-                            translateY: 36,
-                            itemCount: 4,
-                            itemWidth: 42,
-                            itemHeight: 36,
-                            itemsSpacing: 14,
-                            itemDirection: 'right-to-left'
-                        }
-                    ]}
-                />
-            </div>);
+    subCalendarItem(dataVarCal, dataVarLine, address) {
+        if (dataVarCal != null) {
+            var length = dataVarCal["length"];
+            if (length != 0) {
+                var endDate = new Date(dataVarCal[length - 1]["day"]);
+                var startDate = new Date(dataVarCal[0]["day"]);
+                return (<div>
+                    <div >
+                        <h2>
+                            {address}
+                        </h2>
+                    </div>
+                    <div style={{ height: 400 }}>
+                        <ResponsiveLine
+                            data={dataVarLine}
+                            margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+                            xScale={{ type: 'point' }}
+                            yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
+                            yFormat=" >-.2f"
+                            axisTop={null}
+                            axisRight={null}
+                            axisBottom={{
+                                orient: 'bottom',
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 0,
+                                legend: 'Dates',
+                                legendOffset: 36,
+                                legendPosition: 'middle'
+                            }}
+                            axisLeft={{
+                                orient: 'left',
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 0,
+                                legend: 'Price',
+                                legendOffset: -40,
+                                legendPosition: 'middle'
+                            }}
+                            pointSize={10}
+                            pointColor={{ theme: 'background' }}
+                            pointBorderWidth={2}
+                            pointBorderColor={{ from: 'serieColor' }}
+                            pointLabelYOffset={-12}
+                            useMesh={true}
+                            legends={[
+                                {
+                                    anchor: 'bottom-right',
+                                    direction: 'column',
+                                    justify: false,
+                                    translateX: 100,
+                                    translateY: 0,
+                                    itemsSpacing: 0,
+                                    itemDirection: 'left-to-right',
+                                    itemWidth: 80,
+                                    itemHeight: 20,
+                                    itemOpacity: 0.75,
+                                    symbolSize: 12,
+                                    symbolShape: 'circle',
+                                    symbolBorderColor: 'rgba(0, 0, 0, .5)',
+                                    effects: [
+                                        {
+                                            on: 'hover',
+                                            style: {
+                                                itemBackground: 'rgba(0, 0, 0, .03)',
+                                                itemOpacity: 1
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]}
+                        />
+                    </div>
+                    <div style={{ height: 600 }}>
+                        <ResponsiveCalendar
+                            data={dataVarCal}
+                            from={dataVarCal[0]["day"]}
+                            to={dataVarCal[length - 1]["day"]}
+                            emptyColor="#eeeeee"
+                            colors={['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}
+                            margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
+                            yearSpacing={40}
+                            minValue={dataVarCal[0]["value"]}
+                            maxValue={dataVarCal[length - 1]["value"]}
+                            monthBorderColor="#ffffff"
+                            dayBorderWidth={2}
+                            dayBorderColor="#ffffff"
+                            legends={[
+                                {
+                                    anchor: 'bottom-right',
+                                    direction: 'row',
+                                    translateY: 36,
+                                    itemCount: 4,
+                                    itemWidth: 42,
+                                    itemHeight: 36,
+                                    itemsSpacing: 14,
+                                    itemDirection: 'right-to-left'
+                                }
+                            ]}
+                        />
+                    </div>
+                </div>);
+            }
+            else {
+                return (<div></div>);
+            }
         }
         else {
             return (<div></div>);
         }
         
     }
-    renderCalendarItems() {
-
-        
+    renderItems() {
         var returnObj =[];
         var i = 0; 
         for (i = 0; i < homeNumber; i++) {
             var dataVar = calendarData[i];
-            returnObj.push(this.subCalendarItem(dataVar, nameArray[i]));
-        
-            //returnObj +=" <div style={{ height: 400 }}>" + 
-            //                " <ResponsiveCalendar" +
-            //                    "data = {" + dataVar + "}" +
-            //                    "from = \"2015 - 03 - 01\"" +
-            //                    "to = \"2016 - 07 - 12\"" +
-            //                    "emptyColor = \"#eeeeee\"" +
-            //                    "colors = { ['#61cdbb', '#97e3d5', '#e8c1a0', '#f47560']}" +
-            //                    "margin = {{ top: 40, right: 40, bottom: 40, left: 40 }}" +
-            //                    "yearSpacing = { 40}" +
-            //                    "minValue={ 350000 }" +
-            //                    "maxValue = { 400000}" +
-            //                    "monthBorderColor = \"#ffffff\"" +
-            //                    "dayBorderWidth = { 2}" +
-            //                    "dayBorderColor = \"#ffffff\"" +
-            //                    "legends = {" +
-            //                        "[{" +
-            //                            "anchor: 'bottom-right'," +
-            //                            "direction: 'row'," +
-            //                            "translateY: 36," +
-            //                            "itemCount: 4," +
-            //                            "itemWidth: 42," +
-            //                            "itemHeight: 36," +
-            //                            "itemsSpacing: 14," +
-            //                            "itemDirection: 'right-to-left'" +
-            //                        "}]}" +
-            //                " /></div> ";
+            var dataVarLine = [];
+            dataVarLine[0] = propertyArray[i];
+            returnObj.push(this.subCalendarItem(dataVar, dataVarLine, nameArray[i]));
         }
         return returnObj;
     }
     
     parsePricePoint(variable, aDataPoint, address) {
-        var k, n, m = 0; 
+        var k, n, m = 0, b; 
         for (n = 0; n < homeNumber; n++) {
             var property = { id: nameArray[n], color: colorArray[n], data:[]};
             propertyArray[n] = property;
@@ -278,12 +275,29 @@ class App extends React.Component {
                     var month = ("0" + (d.getMonth() + 1)).slice(-2)
                     var day = d.getUTCDate();
                     var year = d.getUTCFullYear();
-                    var newdate = month + "/" + day + "/" + year;
+                    var newdate = year + "/" + month + "/" + day;
                     var caldate = year + "-" + month + "-" + day;
                     propertyArray[n].data.push({ x: newdate, y: (res.data["items"][0]["column_values"][4]["value"].replaceAll('"', '')) });
                     calendarArray[n].push({ day: caldate, value: parseInt((res.data["items"][0]["column_values"][4]["value"].replaceAll('"', '')), 10) });
                 }
                 if (m == (variable["length"] - 1)) {
+                    console.log(propertyArray);
+                    propertyArray.sort(function (a, b) {
+                        //console.log(a["data"]["length"]);
+                        var aLength = a["data"]["length"];
+                        var bLength = b["data"]["length"];
+                        var aDate = new Date(a["data"][aLength - 1]["x"]);
+                        var bDate = new Date(b["data"][bLength - 1]["x"]);
+                        var diffTime = bDate - aDate;
+                        console.log(diffTime);
+                        return diffTime;
+                    });
+                    console.log(propertyArray);
+                    var empty = [];
+                    empty[0] = propertyArray[0];
+                    empty[1] = propertyArray[1];
+                   // empty[2] = propertyArray[2];
+                    //empty[3] = propertyArray[3];
                     data2 = propertyArray;
                     this.setState({ data2: propertyArray });
                     this.setState({ calendarData: calendarArray });
@@ -301,8 +315,7 @@ class App extends React.Component {
         var i, j;
         var propertyArray = [];
         homeNumber = allHomes["length"];
-        for (i = 0; i < homeNumber; i++)
-        {
+        for (i = 0; i < homeNumber; i++) {
             var aDataPoint = [];
             var oneHomeJson = allHomes[i]["column_values"];
             var pricePoints = oneHomeJson["14"]["value"];
@@ -317,15 +330,15 @@ class App extends React.Component {
                 var query = "query { items(ids: " + subtableID + ") { id column_values { id type value } } }";
                 var dataPoint = new data("", "");
                 promises.push(monday.api(query)); //(res => { this.parsePricePoint(res.data, aDataPoint); });
-                
+
             }
             setty[i] = subset;
-            Promise.all(promises).then(res => { this.parsePricePoint(promises, aDataPoint, address, ); });
+            //if (i == 0) {
+                Promise.all(promises).then(res => { this.parsePricePoint(promises, aDataPoint, address); });
+           // }
+            
             
         }
-        //console.log(data2);
-        //console.log(propertyArray);
-        //data2 = propertyArray;
     }
 
     constructor(props) {
@@ -361,7 +374,6 @@ class App extends React.Component {
 
         monday.listen("context", res => {
             this.setState({ context: res.data });
-            //console.log(res.data);
             monday.api('query { boards(ids: [878537780]) { items { name group { id } column_values { id value text }  } }}',
                 { variables: { boardIds: this.state.context.boardIds } }
             )
@@ -371,78 +383,13 @@ class App extends React.Component {
         })
 
         monday.api('query { boards(ids: [878537780]) { items { name group { id } column_values { id value text }  } }}').then(res => { this.parseData(res.data); });
-        console.log("TESTing");
-        //console.log(variable);
     } 
 
     render() {
         return (
             <div style={{ background: (this.state.settings.background), paddingLeft: 100, paddingTop: 100 }}>
-                <div style={{ height: 400 }}>
-                    <ResponsiveLine
-                        data={data2}
-                        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
-                        xScale={{ type: 'point' }}
-                        yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
-                        yFormat=" >-.2f"
-                        axisTop={null}
-                        axisRight={null}
-                        axisBottom={{
-                            orient: 'bottom',
-                            tickSize: 5,
-                            tickPadding: 5,
-                            tickRotation: 0,
-                            legend: 'transportation',
-                            legendOffset: 36,
-                            legendPosition: 'middle'
-                        }}
-                        axisLeft={{
-                            orient: 'left',
-                            tickSize: 5,
-                            tickPadding: 5,
-                            tickRotation: 0,
-                            legend: 'count',
-                            legendOffset: -40,
-                            legendPosition: 'middle'
-                        }}
-                        pointSize={10}
-                        pointColor={{ theme: 'background' }}
-                        pointBorderWidth={2}
-                        pointBorderColor={{ from: 'serieColor' }}
-                        pointLabelYOffset={-12}
-                        useMesh={true}
-                        legends={[
-                            {
-                                anchor: 'bottom-right',
-                                direction: 'column',
-                                justify: false,
-                                translateX: 100,
-                                translateY: 0,
-                                itemsSpacing: 0,
-                                itemDirection: 'left-to-right',
-                                itemWidth: 80,
-                                itemHeight: 20,
-                                itemOpacity: 0.75,
-                                symbolSize: 12,
-                                symbolShape: 'circle',
-                                symbolBorderColor: 'rgba(0, 0, 0, .5)',
-                                effects: [
-                                    {
-                                        on: 'hover',
-                                        style: {
-                                            itemBackground: 'rgba(0, 0, 0, .03)',
-                                            itemOpacity: 1
-                                        }
-                                    }
-                                ]
-                            }
-                        ]}
-                    />
-                </div>
-                
-                
-           
-                {this.renderCalendarItems()}
+               
+                {this.renderItems()}
             </div>
         );
     }
