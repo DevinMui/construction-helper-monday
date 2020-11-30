@@ -3,11 +3,11 @@
 import mondaySdk from "monday-sdk-js";
 
 const monday = mondaySdk();
-var API_KEY =
-  "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjkyMTE0ODcyLCJ1aWQiOjE0ODgwMzE5LCJpYWQiOiIyMDIwLTExLTI3VDIwOjI4OjM2LjAwMFoiLCJwZXIiOiJtZTp3cml0ZSJ9.Ah-Kos4wR6L3-KCvmd4Y6ZIL3AuPfhqrgcWnuG3b3eg";
-const token = API_KEY;
+// var API_KEY =
+//   "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjkyMTE0ODcyLCJ1aWQiOjE0ODgwMzE5LCJpYWQiOiIyMDIwLTExLTI3VDIwOjI4OjM2LjAwMFoiLCJwZXIiOiJtZTp3cml0ZSJ9.Ah-Kos4wR6L3-KCvmd4Y6ZIL3AuPfhqrgcWnuG3b3eg";
+// const token = API_KEY;
 
-const upload = async (file, itemId, columnId) => {
+const upload = async (file, itemId, columnId, token) => {
   const filename = file.name;
   const formData = new FormData();
   formData.append("variables[file]", file, filename);

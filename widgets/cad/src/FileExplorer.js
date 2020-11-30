@@ -96,7 +96,7 @@ const FileExplorer = (props) => {
         let newItem = await monday.api(query);
         newItem = newItem.data.create_item.id;
         console.log("newItem" + JSON.stringify(newItem));
-        let newAsset = await upload(f, newItem, newCol);
+        let newAsset = await upload(f, newItem, newCol, props.token);
         newAsset = newAsset.data.add_file_to_column.id;
         console.log("newASSet" + JSON.stringify(newAsset));
         query = `query {

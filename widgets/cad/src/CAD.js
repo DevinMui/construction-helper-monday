@@ -120,7 +120,8 @@ class CAD extends React.Component {
         let newAsset = await upload(
           f.files[0],
           this.state.itemId,
-          this.state.colId
+          this.state.colId,
+          this.props.token
         );
         newAsset = newAsset.data.add_file_to_column.id;
         console.log("newASSet" + JSON.stringify(newAsset));

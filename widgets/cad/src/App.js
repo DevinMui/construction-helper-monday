@@ -15,7 +15,8 @@ class App extends React.Component {
       boardId: "",
       url: "",
       link: "",
-      assetId: ""
+      assetId: "",
+      token: ""
     };
   }
 
@@ -23,20 +24,20 @@ class App extends React.Component {
     // Get board ID and items
     listenToContext((boardId) => this.setState({ boardId }));
     monday.listen("settings", (e) => {
-      console.log(e.data.link)
-      this.setState({ link: e.data.link });
+      this.setState({ link: e.data.link, token: e.data.token });
     });
   }
 
   render() {
     switch (this.state.view) {
       case "CAD":
-        return <CAD {...this.state} />;
+        return <CAD token={this.state.token} {...this.state} />;
       default:
         // 'files' as default
         return (
           <FileExplorer
             id={this.state.boardId}
+            token={this.state.token}
             onSubmit={(e) => this.setState({ ...e, view: "CAD" })}
           />
         );
