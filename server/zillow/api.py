@@ -56,7 +56,7 @@ def search(addr: str):
             {
                 "pagination": {},
                 "mapBounds": latlng_bounds,
-                "mapZoom": 13,
+                "mapZoom": 11,
                 "isMapVisible": True,
                 "filterState": {
                     "isAllHomes": {"value": True},

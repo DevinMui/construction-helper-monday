@@ -78,8 +78,8 @@ def all_search():
             if param + "Id" in payload:
                 columns[param] = payload.get(param + "Id", None)
 
-        # values = zillow_api.search(address).json()
-        values = json.loads(open("./zillow/search.json", "r").read())
+        values = zillow_api.search(address).json()
+        # values = json.loads(open("./zillow/search.json", "r").read())
 
         # parse zillow response
         values = values["cat1"]["searchResults"]["mapResults"]
@@ -98,7 +98,9 @@ def all_search():
             # build response values
             column_values = {}
             for key in columns.keys():
-                column_values[columns[key]] = value[key]
+                val = value.get(key, None)
+                if val:
+                    column_values[columns[key]] = val
 
             create_item(board_id, group_id, item_name, column_values)
 
@@ -146,8 +148,8 @@ def single_search():
             if param + "Id" in payload:
                 columns[param] = payload.get(param + "Id", None)
 
-        # values = zillow_api.search(address).json()
-        values = json.loads(open("./zillow/search.json", "r").read())
+        values = zillow_api.search(address).json()
+        # values = json.loads(open("./zillow/search.json", "r").read())
 
         # parse zillow response
         values = values["cat1"]["searchResults"]["mapResults"]
@@ -160,12 +162,14 @@ def single_search():
         # build response values
         column_values = {}
         for key in columns.keys():
-            column_values[columns[key]] = values[key]
+            val = values.get(key, None)
+            if val:
+                column_values[columns[key]] = val
 
         # fetch walkscore
         if "walkscoreId" in payload:
-            # walkscore = zillow_api.get_walkscore(zpid).json()
-            walkscore = json.loads(open("./zillow/walk.json", "r").read())
+            walkscore = zillow_api.get_walkscore(zpid).json()
+            # walkscore = json.loads(open("./zillow/walk.json", "r").read())
             walkscore = walkscore["data"]["property"]["transitScore"]["transit_score"]
             column_values[payload["walkscoreId"]] = walkscore
 
@@ -190,8 +194,8 @@ def fetch_price_history():
         item_id = payload["itemId"]
         address = payload["addressValue"]
 
-        # values = zillow_api.search(address).json()
-        values = json.loads(open("./zillow/search.json", "r").read())
+        values = zillow_api.search(address).json()
+        # values = json.loads(open("./zillow/search.json", "r").read())
 
         # parse zillow response
         values = values["cat1"]["searchResults"]["mapResults"]
@@ -208,9 +212,11 @@ def fetch_price_history():
 
 
 def fetch_price_history_to_monday(board_id: int, item_id: int, zid: int):
-    price_data = json.loads(open("./zillow/prices.json", "r").read())
-    price_data = price_data["data"]["property"]["homeValueChartData"]
-    # price_data = zillow_api.get_price_history(zid).json()["data"]["property"]["homeValueChartData"]
+    # price_data = json.loads(open("./zillow/prices.json", "r").read())
+    # price_data = price_data["data"]["property"]["homeValueChartData"]
+    price_data = zillow_api.get_price_history(zid).json()["data"]["property"][
+        "homeValueChartData"
+    ]
     price_history = price_data[0]["points"]
     sell_history = price_data[1]["points"]
     # get column id of sub item
