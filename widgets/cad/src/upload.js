@@ -1,10 +1,13 @@
 // adapted from: https://gist.github.com/yuhgto/edb5d96e088599c2a6ea44860df9117b
 // set auth token and query
-var API_KEY =
-  "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjkyMTE0ODcyLCJ1aWQiOjE0ODgwMzE5LCJpYWQiOiIyMDIwLTExLTI3VDIwOjI4OjM2LjAwMFoiLCJwZXIiOiJtZTp3cml0ZSJ9.Ah-Kos4wR6L3-KCvmd4Y6ZIL3AuPfhqrgcWnuG3b3eg";
-const token = API_KEY;
+import mondaySdk from "monday-sdk-js";
 
-const upload = async (file, itemId, columnId) => {
+const monday = mondaySdk();
+// var API_KEY =
+//   "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjkyMTE0ODcyLCJ1aWQiOjE0ODgwMzE5LCJpYWQiOiIyMDIwLTExLTI3VDIwOjI4OjM2LjAwMFoiLCJwZXIiOiJtZTp3cml0ZSJ9.Ah-Kos4wR6L3-KCvmd4Y6ZIL3AuPfhqrgcWnuG3b3eg";
+// const token = API_KEY;
+
+const upload = async (file, itemId, columnId, token) => {
   const filename = file.name;
   const formData = new FormData();
   formData.append("variables[file]", file, filename);
@@ -26,7 +29,11 @@ const upload = async (file, itemId, columnId) => {
     d = await d.json();
     return d;
   } catch (e) {
-    alert('There was an error uploading your file. Please try again.');
+    monday.execute("notice", {
+      message: "There was an error uploading your file. Please try again.",
+      type: "error",
+      timeout: 10000,
+    });
   }
 };
 

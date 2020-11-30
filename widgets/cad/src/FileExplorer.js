@@ -30,7 +30,6 @@ function mapItemsToOptions(items) {
     };
     ret.push(e);
   }
-  console.log(ret)
   return ret;
 }
 
@@ -97,7 +96,7 @@ const FileExplorer = (props) => {
         let newItem = await monday.api(query);
         newItem = newItem.data.create_item.id;
         console.log("newItem" + JSON.stringify(newItem));
-        let newAsset = await upload(f, newItem, newCol);
+        let newAsset = await upload(f, newItem, newCol, props.token);
         newAsset = newAsset.data.add_file_to_column.id;
         console.log("newASSet" + JSON.stringify(newAsset));
         query = `query {
@@ -107,9 +106,7 @@ const FileExplorer = (props) => {
             }
           }`
         let url = await monday.api(query)
-        console.log(url)
         url = url.data.assets[0].public_url
-        console.log(url)
         fileObj = {
           name: f.name,
           itemId: newItem,
@@ -120,7 +117,6 @@ const FileExplorer = (props) => {
         console.log("fileObj", JSON.stringify(fileObj));
       } else {
         // file dropdown used
-        console.log(selectFile.value)
         let query = `
         query {
           assets(ids: [${JSON.parse(selectFile.value).assetId}]){
@@ -129,17 +125,19 @@ const FileExplorer = (props) => {
           }
         }
         `
-        console.log(query)
         let d = await monday.api(query)
-        console.log(d)
-        fileObj = selectFile;
+        fileObj = JSON.parse(selectFile.value);
         fileObj.url = d.data.assets[0].public_url
       }
       setCol(newCol);
       if (props.onSubmit) props.onSubmit(fileObj);
     } catch (e) {
-      console.log(e);
-      alert("There was an error uploading your file. Please try again.");
+      console.error(e);
+      monday.execute("notice", {
+        message: "There was an error uploading your file. Please try again.",
+        type: "error",
+        timeout: 10000,
+      });
     }
   };
 
@@ -149,6 +147,7 @@ const FileExplorer = (props) => {
       <Select
         options={mapItemsToOptions(items)}
         onChange={(f) => {
+          console.log(f)
           setSelectFile(f);
           setF(false);
           if (fileRef.current) {

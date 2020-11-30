@@ -43,6 +43,7 @@ body {
 .button-row {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   margin-bottom: 4px;
   margin-top: 4px;
 }
@@ -65,13 +66,13 @@ body {
 }
 
 .button-disabled {
-  background-color: #C5C7D0;
+  background-color: #c5c7d0;
   cursor: not-allowed;
   color: white;
 }
 
 .button-disabled:hover {
-  background-color: #C5C7D0;
+  background-color: #c5c7d0;
 }
 
 textarea,
@@ -103,6 +104,8 @@ input {
 .button-important {
   color: white;
   background: #0085ff;
+  padding-bottom: 8px;
+  padding-top: 8px;
 }
 
 .button-important:hover {
@@ -110,6 +113,7 @@ input {
 }
 
 .alert-container {
+  position: absolute;
   background: rgba(0, 0, 0, 0.5);
   pointer-events: auto;
   padding: 0.5rem;
@@ -150,7 +154,7 @@ button {
   width: 10px;
   height: 10px;
   cursor: pointer;
-  z-index: 5!important;
+  z-index: 5 !important;
   pointer-events: all;
 }
 .annotation-label {
@@ -159,7 +163,7 @@ button {
   padding: 4px;
   transform: translate(-30px, -12px);
   background: rgba(0, 0, 0, 0.5);
-  z-index: 5!important;
+  z-index: 5 !important;
 }
 .annotation-title {
   font-weight: bold;
@@ -189,4 +193,77 @@ button {
 
 .annotation-grounded .annotation-title {
   min-width: 60px;
+  flex-grow: 1;
+}
+
+textarea[placeholder="Description"] {
+  min-height: 7rem;
+}
+
+.char-counter {
+  margin-bottom: -1.5rem;
+  opacity: 0.5;
+}
+
+.price {
+  position: fixed;
+  margin: 8px;
+  transition: 0.5s all;
+  overflow-y: hidden;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  right: 0;
+  bottom: 0;
+  pointer-events: auto;
+  padding: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.price h1,
+h2,
+h3,
+h4 {
+  color: white;
+}
+
+.price h4 {
+  margin-bottom: 4px;
+}
+
+.price .input-row {
+  display: flex;
+  align-items: center;
+}
+
+.input-row > * {
+  padding: 8px;
+  flex-grow: 1;
+}
+
+.input-row input {
+  max-width: 60%;
+  flex-shrink: 1;
+  padding-top: 12px;
+  margin-top: 6px;
+  padding-bottom: 12px;
+}
+
+#upload-icon {
+  transition: 0.25s all;
+  opacity: 0.5;
+}
+
+#upload-icon:hover {
+  opacity: 0.8
+}
+
+.price .est-cost-row {
+  display: flex;
+  align-items: center;
+}
+.est-cost-row h3 {
+  flex-grow: 1;
+  padding-right: 16px;
 }

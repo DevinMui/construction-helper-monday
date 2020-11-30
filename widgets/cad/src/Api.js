@@ -10,14 +10,16 @@ const listenToContext = (cb) => {
 // Annotations
 // -----
 const deleteAnnotation = async (itemId) => {
-  // remove subitem form table
+  // remove subitem from table
 };
-const getAnnotations = async (itemId) => {
+const getAnnotations = async (itemId, assetId) => {
   // Read subitems
+  // Filter metadata
 };
-const createAnnotation = async (itemId, title, description, user) => {
+const createAnnotation = async (itemId, assetId, title, description, user) => {
   // Check for subitem column
   // formats title, description, user
+  // formats metadata
 };
 
 const getSTLItems = async (boardId) => {
@@ -39,10 +41,10 @@ const getSTLItems = async (boardId) => {
   for (let item of items) {
     for (let cv of item["column_values"]) {
       if (cv["type"] === "file") {
-        let files = []
-        try { 
-            let e = JSON.parse(cv["value"]).files;
-            files = e
+        let files = [];
+        try {
+          let e = JSON.parse(cv["value"]).files;
+          files = e;
         } catch (e) {}
         for (let file of files) {
           if (file.name.endsWith(".stl")) {
@@ -61,6 +63,7 @@ const getSTLItems = async (boardId) => {
       }
     }
   }
+  console.log('items', ret)
   return ret;
   // returns a map as
   // name : [{filename, item id, col id, asset Id}]
