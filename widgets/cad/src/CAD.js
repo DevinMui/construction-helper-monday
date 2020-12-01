@@ -30,6 +30,7 @@ class CAD extends React.Component {
       saving: false,
       annotation: false,
     };
+    console.log(props.url)
   }
 
   loadAnnotations = async (boardId, itemId, assetId) => {
@@ -84,24 +85,26 @@ class CAD extends React.Component {
       let dss = "";
       let annotation = { description: "" };
       for (const v of val) {
-        if (v.type === "long-text" && v.value && v.title === "Description") {
-          annotation.description = JSON.parse(v.value).text;
-          dss = JSON.parse(v.value).text;
-        } else if (
-          v.type === "long-text" &&
-          v.value &&
-          v.title === "Metadata"
-        ) {
-          let o = JSON.parse(v.value).text;
-          o = JSON.parse(o);
-          let timestamp = new Date(o.timestamp);
-          let author = o.author;
-          o.description = `${dss} (created by ${author} at ${timestamp.toLocaleString()})`;
-          o.values.description = o.description;
-          o.values.title = n;
-          if (o.assetId === assetId || o.assetId === "all")
-            annotations.push(o);
-        }
+        try {
+          if (v.type === "long-text" && v.value && v.title === "Description") {
+            annotation.description = JSON.parse(v.value).text;
+            dss = JSON.parse(v.value).text;
+          } else if (
+            v.type === "long-text" &&
+            v.value &&
+            v.title === "Metadata"
+          ) {
+            let o = JSON.parse(v.value).text;
+            o = JSON.parse(o);
+            let timestamp = new Date(o.timestamp);
+            let author = o.author;
+            o.description = `${dss} (created by ${author} at ${timestamp.toLocaleString()})`;
+            o.values.description = o.description;
+            o.values.title = n;
+            if (o.assetId === assetId || o.assetId === "all")
+              annotations.push(o);
+          }
+        } catch (e) {}
       }
     }
     return annotations;
@@ -135,7 +138,7 @@ class CAD extends React.Component {
         let url = await monday.api(query);
         console.log(url.data);
         url = url.data.assets[0].public_url;
-        this.setState({url})
+        this.setState({ url });
         // load new stl
         const model = this.stlViewer.load({
           id: uuid(),
@@ -146,7 +149,8 @@ class CAD extends React.Component {
           if (this.viewer) this.viewer.cameraFlight.jumpTo(model);
         });
 
-        if (this.annotations) this.loadAnnotations(this.state.boardId, this.state.itemId, newAsset);
+        if (this.annotations)
+          this.loadAnnotations(this.state.boardId, this.state.itemId, newAsset);
       } else {
         monday.execute("notice", {
           message: `Please upload a STL file.`,
@@ -160,13 +164,13 @@ class CAD extends React.Component {
   addAnnotation = (annotation) => {
     try {
       this.annotations.createAnnotation(annotation);
-    } catch(e) {
+    } catch (e) {
       monday.execute("notice", {
         message:
           "New annotations may have been created since this page was loaded.",
         type: "info",
       });
-      console.error(e)
+      console.error(e);
     }
   };
 
@@ -201,7 +205,11 @@ class CAD extends React.Component {
       },
     });
 
-    this.loadAnnotations(this.state.boardId, this.state.itemId, this.state.assetId)
+    this.loadAnnotations(
+      this.state.boardId,
+      this.state.itemId,
+      this.state.assetId
+    )
       .then((a) => a.map(this.addAnnotation))
       .catch((e) => {
         console.error(e);

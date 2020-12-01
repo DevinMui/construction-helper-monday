@@ -43,12 +43,12 @@ const Alert = (props) => {
   const [color, setColor] = React.useState("grey");
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false);
   const checkboxRef = React.useRef(null);
 
   const action = async (e) => {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       let me = await monday.api(`query { me { name } }`);
       me = me.data.me.name;
@@ -79,7 +79,7 @@ const Alert = (props) => {
             type: "error",
             timeout: 10000,
           });
-          setIsLoading(false)
+          setIsLoading(false);
           return;
         }
         query = `query {
@@ -100,10 +100,18 @@ const Alert = (props) => {
         for (let item of q) {
           if (item.items.length > 0) {
             const v = item.items[0].column_values[0].value;
-            linkPulse = JSON.parse(v).linkedPulseIds[0].linkedPulseId;
+            try {
+              linkPulse = JSON.parse(v).linkedPulseIds[0].linkedPulseId;
+            } catch (err) {
+              console.log(err);
+            }
           }
         }
-
+        if(!linkPulse) {
+          query = `mutation{create_subitem(parent_item_id: ${props.itemId}, item_name: "_") {id}}`
+          q = await monday.api(query)
+          linkPulse = q.data.create_subitem.id
+        }
         query = `query {
           items(ids:${linkPulse}) {
             id
@@ -136,7 +144,7 @@ const Alert = (props) => {
             type: "error",
             timeout: 10000,
           });
-          setIsLoading(false)
+          setIsLoading(false);
           return;
         }
         if (!metaExists) {
@@ -146,7 +154,7 @@ const Alert = (props) => {
             type: "error",
             timeout: 10000,
           });
-          setIsLoading(false)
+          setIsLoading(false);
           return;
         }
 
@@ -188,7 +196,9 @@ const Alert = (props) => {
           values: {
             glyph: "🐻",
             title: title,
-            description: description,
+            description: `${description} (Created by ${me} at ${new Date(
+              Date.now()
+            ).toLocaleString()})`,
             labelBGColor: color,
           },
         });
@@ -209,7 +219,7 @@ const Alert = (props) => {
       });
       console.error(e);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
   return (
     <div className="alert-container" onClick={props.close}>
@@ -246,8 +256,18 @@ const Alert = (props) => {
                   marginTop: "-1rem",
                 }}
               >
-                <input type="checkbox" id="show-all-screens" ref={checkboxRef} style={{ cursor: 'pointer'}}></input>
-                <label htmlFor="show-all-screens" style={{marginLeft: 4, cursor: 'pointer'}}>Show on all versions</label>
+                <input
+                  type="checkbox"
+                  id="show-all-screens"
+                  ref={checkboxRef}
+                  style={{ cursor: "pointer" }}
+                ></input>
+                <label
+                  htmlFor="show-all-screens"
+                  style={{ marginLeft: 4, cursor: "pointer" }}
+                >
+                  Show on all versions
+                </label>
               </div>
             </div>
             <div className="button-row">
@@ -306,7 +326,10 @@ const Alert = (props) => {
         {
           // TODO: add loader here
         }
-        <div className="button-row" style={{visibility: isLoading? 'hidden': 'visible'}}>
+        <div
+          className="button-row"
+          style={{ visibility: isLoading ? "hidden" : "visible" }}
+        >
           <div className="button" onClick={props.close}>
             Cancel
           </div>
