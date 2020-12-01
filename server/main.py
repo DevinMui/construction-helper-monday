@@ -12,6 +12,7 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
 
+# TODO: figure out oauth
 SIGNING_TOKEN = "a330465c01699e22129599e12107fe38"
 API_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjkyMDUxNTQwLCJ1aWQiOjE0ODgwMzE4LCJpYWQiOiIyMDIwLTExLTI2VDIzOjU4OjU4LjAwMFoiLCJwZXIiOiJtZTp3cml0ZSJ9.71SM1nsCH-niBQS1wCGGsRF1URyZDj8e7kMvoFqR6zM"
 
@@ -142,8 +143,6 @@ def single_search():
             "lotAreaUnit",
         ]
 
-
-
         # get column labels
         columns = {}
         for param in params:
@@ -196,7 +195,6 @@ def fetch_price_history():
         item_id = payload["itemId"]
         address = payload["addressValue"]
 
-
         values = zillow_api.search(address).json()
         # values = json.loads(open("./zillow/search.json", "r").read())
 
@@ -246,7 +244,6 @@ def fetch_price_history_to_monday(board_id: int, item_id: int, zid: int):
                 continue
             if column["title"] == label:
                 columns[label] = column["id"]
-
 
     # create necessary columns
     for label in labels:
