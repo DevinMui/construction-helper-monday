@@ -120,7 +120,7 @@ class App extends React.Component {
     
 
     subCalendarItem(dataVarCal, dataVarLine, address) {
-        if (dataVarCal != null) {
+        if (dataVarCal != null && dataVarLine != null && dataVarLine != "") {
             var length = dataVarCal["length"];
             if (length != 0) {
                 var endDate = new Date(dataVarCal[length - 1]["day"]);
@@ -281,23 +281,19 @@ class App extends React.Component {
                     calendarArray[n].push({ day: caldate, value: parseInt((res.data["items"][0]["column_values"][4]["value"].replaceAll('"', '')), 10) });
                 }
                 if (m == (variable["length"] - 1)) {
+                    //console.log("HEJEJ");
+                    //console.log(propertyArray);
+                    //propertyArray.sort(function (a, b) {
+                    //    //console.log(a["data"]["length"]);
+                    //    var aLength = a["data"]["length"];
+                    //    var bLength = b["data"]["length"];
+                    //    var aDate = new Date(a["data"][aLength - 1]["x"]);
+                    //    var bDate = new Date(b["data"][bLength - 1]["x"]);
+                    //    var diffTime = bDate - aDate;
+                    //    console.log(diffTime);
+                    //    return diffTime;
+                    //});
                     console.log(propertyArray);
-                    propertyArray.sort(function (a, b) {
-                        //console.log(a["data"]["length"]);
-                        var aLength = a["data"]["length"];
-                        var bLength = b["data"]["length"];
-                        var aDate = new Date(a["data"][aLength - 1]["x"]);
-                        var bDate = new Date(b["data"][bLength - 1]["x"]);
-                        var diffTime = bDate - aDate;
-                        console.log(diffTime);
-                        return diffTime;
-                    });
-                    console.log(propertyArray);
-                    var empty = [];
-                    empty[0] = propertyArray[0];
-                    empty[1] = propertyArray[1];
-                   // empty[2] = propertyArray[2];
-                    //empty[3] = propertyArray[3];
                     data2 = propertyArray;
                     this.setState({ data2: propertyArray });
                     this.setState({ calendarData: calendarArray });
