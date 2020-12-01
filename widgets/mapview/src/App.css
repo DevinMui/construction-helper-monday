@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  overflow: hidden;
+}
+
+.App {
+  height: inherit;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marker {
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  transition: 0.25s all;
+}
+
+.marker:hover {
+  height: 12px;
+  width: 12px;
+}
+
+.properties-list  {
+  color: white;
+  position: absolute;
+  padding: 16px;
+  height: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  width: 25%;
+  z-index: 999;
+  overflow-y: auto;
+}
+
+.properties-list h2 {
+  position: fixed;
+  margin-top: 0;
+  z-index: -1
+}
+
+.prop-inner {
+  overflow-y: auto;
+  margin-top: 3rem;
+}
+
+.property-card {
+  margin-bottom: 0.5rem;
+  padding: 8px;
+  color: #323338;
+  border-radius: 4px;
+  background-color: white;
+  padding-top: 16px;
+  flex-direction: column;
+
+  display: flex;
+  box-shadow: 0.0px 4.0px 8.0px 0px rgba(0, 0, 0, 0.2);
+}
+
+.row {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.prop-title {
+  flex-grow: 1;
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+.prop-address {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.prop-anomaly {
+  position: relative;
+  align-self: flex-end;
+  font-size: 12px;
+  margin-top: 16px;
+  opacity: 0.8;
+}

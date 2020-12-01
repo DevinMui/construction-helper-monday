@@ -8,3 +8,7 @@ put data to {bathrooms, bathroomsId}, {bedrooms, bedroomsId}, {living area, livi
 put data to subitem
 
 put data to {walkscore, walkscoreId}
+
+
+put data to {group, groupId} with {price, priceId}, {bathrooms, bathroomsId}, {bedrooms, bedroomsId}, {living area, livingAreaId}, {estimate, zestimateId}, {rent, rentZestimateId}, {tax value, taxAssessedValueId}, {lot value, lotAreaValueId}, {lat, latitudeId}, {lng, longitudeId}
+

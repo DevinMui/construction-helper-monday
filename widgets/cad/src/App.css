@@ -1,0 +1,269 @@
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  color: #323338;
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 18px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+.App {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  pointer-events: none;
+  background-color: transparent;
+}
+
+.alert {
+  background-color: white;
+  padding: 1rem;
+  box-shadow: 0px 6px 20px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  display: block;
+  max-width: 500px;
+  width: 100%;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 4px;
+  margin-top: 4px;
+}
+
+.color {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  border-radius: 50%;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.file-explorer {
+  max-width: 80%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  flex-direction: column;
+  display: flex;
+}
+
+.button-disabled {
+  background-color: #c5c7d0;
+  cursor: not-allowed;
+  color: white;
+}
+
+.button-disabled:hover {
+  background-color: #c5c7d0;
+}
+
+textarea,
+input {
+  border-radius: 4px;
+  border: 1px solid rgb(197, 199, 208);
+  padding: 8px;
+  overflow: auto;
+  outline: none;
+
+  margin-bottom: 0.5rem;
+  font-family: inherit;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none; /*remove the resize handle on the bottom right*/
+
+  /* border-color: ; */
+}
+
+.button-row div {
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 8px;
+}
+
+.button-important {
+  color: white;
+  background: #0085ff;
+  padding-bottom: 8px;
+  padding-top: 8px;
+}
+
+.button-important:hover {
+  background: #0071d9;
+}
+
+.alert-container {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  z-index: 9999999;
+}
+
+canvas {
+  position: absolute;
+  pointer-events: all;
+  /* z-index: -1; */
+  width: inherit;
+  height: inherit;
+  background-color: #003262;
+}
+
+canvas * {
+  position: fixed;
+}
+
+button {
+  border: none;
+  border-radius: 4px;
+  padding-left: 16px;
+  cursor: pointer;
+  margin-left: 12px;
+  padding-right: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.annotation-marker {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  z-index: 5 !important;
+  pointer-events: all;
+}
+.annotation-label {
+  position: absolute;
+  color: white;
+  padding: 4px;
+  transform: translate(-30px, -12px);
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5 !important;
+}
+.annotation-title {
+  font-weight: bold;
+}
+.annotation-description {
+  /* position: absolute; */
+  margin-top: 12px;
+  margin-bottom: 8px;
+  max-height: 90vh;
+  max-width: 600px;
+  overflow-y: auto;
+}
+
+.annotation-grounded {
+  position: fixed;
+  max-width: 33%;
+  color: white;
+  margin: 8px;
+  border-radius: 4px;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  left: 0;
+  top: 0;
+  pointer-events: auto;
+}
+
+.annotation-grounded .annotation-title {
+  min-width: 60px;
+  flex-grow: 1;
+}
+
+textarea[placeholder="Description"] {
+  min-height: 7rem;
+}
+
+.char-counter {
+  margin-bottom: -1.5rem;
+  opacity: 0.5;
+}
+
+.price {
+  position: fixed;
+  margin: 8px;
+  transition: 0.5s all;
+  overflow-y: hidden;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  right: 0;
+  bottom: 0;
+  pointer-events: auto;
+  padding: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.price h1,
+h2,
+h3,
+h4 {
+  color: white;
+}
+
+.price h4 {
+  margin-bottom: 4px;
+}
+
+.price .input-row {
+  display: flex;
+  align-items: center;
+}
+
+.input-row > * {
+  padding: 8px;
+  flex-grow: 1;
+}
+
+.input-row input {
+  max-width: 60%;
+  flex-shrink: 1;
+  padding-top: 12px;
+  margin-top: 6px;
+  padding-bottom: 12px;
+}
+
+#upload-icon {
+  transition: 0.25s all;
+  opacity: 0.5;
+}
+
+#upload-icon:hover {
+  opacity: 0.8
+}
+
+.price .est-cost-row {
+  display: flex;
+  align-items: center;
+}
+.est-cost-row h3 {
+  flex-grow: 1;
+  padding-right: 16px;
+}

@@ -1,4 +1,7 @@
-*/node_modules/
+*.stl
+*.zip
+build/
+node_modules/
 */env
 .env
 __pycache__
