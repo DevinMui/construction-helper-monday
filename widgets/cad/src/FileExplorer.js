@@ -162,7 +162,7 @@ const FileExplorer = (props) => {
       </div>
       <input type="file" ref={fileRef} />
       <button
-        onClick={submit}
+        onClick={e => ((selectFile && col) || f ) && submit(e)}
         className={(selectFile && col) || f ? "button-important" : "button-disabled"}
         style={{ paddingTop: 8, marginTop: 8, paddingBottom: 8, marginLeft: 0 }}
       >
